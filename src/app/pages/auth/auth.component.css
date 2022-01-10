@@ -1,0 +1,21 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container {
+  width: 600px;
+  height: 900px;
+  text-align: center;
+  border-radius: 2%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.title {
+  margin-top: 60px;
+  font-size: 36px;
+}
+

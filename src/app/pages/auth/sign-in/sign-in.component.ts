@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-sign-in',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+
+  public emailFormControl: FormControl = new FormControl('', [Validators.required, Validators.email]);
 
   constructor() { }
 
