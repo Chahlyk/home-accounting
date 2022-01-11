@@ -1,1 +1,26 @@
+* {
+  font-size: 20px;
+}
 
+a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.title {
+  margin: 0 0 40px 0;
+}
+
+.mat-form-field {
+  margin: 10px;
+}
+
+.mat-raised-button {
+  width: 150px;
+  height: 60px;
+  margin: 40px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
