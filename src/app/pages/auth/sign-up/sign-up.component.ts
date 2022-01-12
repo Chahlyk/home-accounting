@@ -8,21 +8,22 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 })
 export class SignUpComponent implements OnInit {
 
-  public email = new FormControl('', [Validators.required, Validators.email]);
   public hide: boolean = true;
   public form!: FormGroup;
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
+  public constructor() { }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+  public ngOnInit(): void {
+    this.buildForm();
   }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  private buildForm(): void {
+    this.form = new FormGroup( {
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [Validators.minLength(6) ,Validators.required]),
+      name: new FormControl('', Validators.required),
+      check: new FormControl(false, Validators.required)
+    })
   }
 
 }

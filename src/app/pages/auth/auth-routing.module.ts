@@ -6,10 +6,10 @@ import { AuthComponent } from "./auth.component";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/auth/sign-in', pathMatch: 'full' },
-  { path: 'auth', component: AuthComponent, children: [
+  { path: '', component: AuthComponent, children: [
       { path: 'sign-in', component: SignInComponent },
       { path: 'sign-up', component: SignUpComponent },
+      { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
     ]},
 ]
 

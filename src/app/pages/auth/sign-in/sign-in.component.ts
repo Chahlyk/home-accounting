@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'app-sign-in',
@@ -8,26 +9,25 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 })
 export class SignInComponent implements OnInit {
 
-  public password = new FormControl('', [Validators.required, Validators.minLength(6)]);
   public hide: boolean = true;
-  public form: any;
+  public form!: FormGroup;
 
-  public getErrorMessage(): string {
-    if (this.password.hasError('required')) {
-      return 'Please, enter a value';
-    } else {
-      return this.password.hasError('minLength') ? 'Your password must be at least 6 characters' : '';
-    }
-  }
+  public constructor(private http: HttpClient) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.buildForm();
+    this.getData();
   }
 
-  public buildForm(): any {
-    return this.form = new FormGroup( {
+  private getData(): any {
+    this.http.get('http://localhost:3000/categories')
+      .subscribe((data:any) => {
+        console.log(data);
+      })
+  }
+
+  private buildForm(): void {
+    this.form = new FormGroup( {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.minLength(6) ,Validators.required]),
     })
