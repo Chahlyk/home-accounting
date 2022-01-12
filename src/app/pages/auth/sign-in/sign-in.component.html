@@ -22,4 +22,5 @@
     <button mat-raised-button color="primary" [routerLink]="['/bill']" [disabled]="form.invalid">Sign In</button>
     <p>Don't have an account? <a [routerLink]="['/sign-up']">Sign Up!</a></p>
   </form>
+  <p (click)="signIn()">Show User</p>
 </div>
