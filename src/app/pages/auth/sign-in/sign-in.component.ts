@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { HttpClient } from "@angular/common/http";
-import { IUser } from "../../../shared/interfaces";
 import { AuthService } from "../auth.service";
+import { IUser } from "../../../shared/interfaces";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -14,30 +14,34 @@ export class SignInComponent implements OnInit {
   public hide: boolean = true;
   public auth: boolean = false;
   public form!: FormGroup;
-  public user!: IUser;
-  public dataUser!: IUser;
+  public authCode!: string;
 
-  public constructor(private authService: AuthService) { }
+  public constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   public ngOnInit(): void {
     this.buildForm();
-    this.getUser();
   }
 
-  private getUser(): void {
-    this.authService.getUser()
-      .subscribe((data:any) => {
-        this.dataUser = data;
-        console.log(this.dataUser)
-      })
-  }
-
-  public signIn(): any {
-    this.user = {...this.form.value};
-    if ((this.user.email === this.dataUser.email) && (this.user.password === this.dataUser.password)) {
-      this.auth = true;
-    } else return;
-    console.log(this.user, this.auth);
+  public getUserEmail(): void {
+    const email = {...this.form.value}
+    this.authService.getUser(email.email)
+      .subscribe((data: Array<IUser>) => {
+        setTimeout(() => {
+          if (data.length === 0) {
+          this.authCode = 'notExist';
+        } else {
+          if (email.password === data[0].password) {
+            this.authCode = 'exactly';
+            this.router.navigate(['/bill']);
+          } else {
+            this.authCode = 'incorrect';
+          }}
+        }, 5000);
+        this.authCode = 'waiting';
+        })
   }
 
   private buildForm(): void {

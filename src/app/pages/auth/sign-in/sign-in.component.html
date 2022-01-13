@@ -1,26 +1,32 @@
 <div class="container">
   <p class="title">Sign In For Work</p>
+  <div *ngIf="authCode === 'notExist'" class="authError">
+    <p>This user does not exist</p>
+  </div>
+  <div *ngIf="authCode === 'incorrect'" class="authError">
+    <p>Password is not correct</p>
+  </div>
   <form [formGroup]="form">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput placeholder="pat@example.com"  formControlName="email">
-      <mat-error *ngIf="form.get('email')?.errors?.['required']">This field cannot be empty</mat-error>
+      <mat-error *ngIf="form.get('email')?.errors?.['required']">Field is required</mat-error>
       <mat-error *ngIf="form.get('email')?.errors?.['email']">Email is invalid</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
       <input matInput #input [type]="hide ? 'password' : 'text'" formControlName="password">
-      <mat-error *ngIf="form.get('password')?.errors?.['required']">This field cannot be empty</mat-error>
+      <mat-error *ngIf="form.get('password')?.errors?.['required']">Field is required</mat-error>
       <mat-error *ngIf="form.get('password')?.errors?.['minlength']">
-        Password must be at least 6 characters long
-        <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+        Password length must be more than 6 symbols. Now
+        <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
       </mat-error>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-    <button mat-raised-button color="primary" [routerLink]="['/bill']" [disabled]="form.invalid">Sign In</button>
+    <button mat-raised-button color="primary" (click)="getUserEmail()" [disabled]="form.invalid">Sign In</button>
     <p>Don't have an account? <a [routerLink]="['/sign-up']">Sign Up!</a></p>
   </form>
-  <p (click)="signIn()">Show User</p>
+  <mat-spinner *ngIf="authCode === 'waiting'"></mat-spinner>
 </div>

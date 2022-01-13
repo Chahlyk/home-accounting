@@ -6,8 +6,8 @@ import { HttpClient } from "@angular/common/http";
 })
 export class AuthService {
 
-  public getUser(): any {
-    return this.http.get(`http://localhost:3000/users`);
+  public getUser(email: string): any {
+    return this.http.get(`http://localhost:3000/users?email=${email}`);
   }
 
   constructor(private http: HttpClient) { }
