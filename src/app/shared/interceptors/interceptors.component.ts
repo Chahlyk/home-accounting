@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-interseptors',
-  templateUrl: './interseptors.component.html',
-  styleUrls: ['./interseptors.component.css']
+  templateUrl: './interceptors.component.html',
+  styleUrls: ['./interceptors.component.css']
 })
-export class InterseptorsComponent implements OnInit {
+export class InterceptorsComponent implements OnInit {
 
   constructor() { }
 

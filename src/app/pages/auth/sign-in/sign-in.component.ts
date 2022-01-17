@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { IUser } from "../../../shared/interfaces";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, OnDestroy {
 
   public hide: boolean = true;
-  public auth: boolean = false;
   public form!: FormGroup;
-  public authCode!: string;
+  public errorText: string = '';
+
+  private sub: Subscription = new Subscription();
 
   public constructor(
     private authService: AuthService,
@@ -25,23 +27,30 @@ export class SignInComponent implements OnInit {
     this.buildForm();
   }
 
-  public getUserEmail(): void {
-    const email = {...this.form.value}
-    this.authService.getUser(email.email)
-      .subscribe((data: Array<IUser>) => {
-        setTimeout(() => {
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  public signIn(): void {
+    const user = {...this.form.value}
+    this.authService.getUser(user.email)
+      .subscribe((data: IUser[]) => {
           if (data.length === 0) {
-          this.authCode = 'notExist';
-        } else {
-          if (email.password === data[0].password) {
-            this.authCode = 'exactly';
-            this.router.navigate(['/bill']);
+            this.errorMessage( 'This user does not exist');
           } else {
-            this.authCode = 'incorrect';
-          }}
-        }, 5000);
-        this.authCode = 'waiting';
-        })
+            if (user.password === data[0].password) {
+              this.router.navigate(['/bill']);
+            } else {
+              this.errorMessage('Password is not correct');
+            }}
+      })
+  }
+
+  private errorMessage(text: string): void {
+    this.errorText = text;
+    setTimeout(() => {
+      this.errorText = '';
+    }, 5000)
   }
 
   private buildForm(): void {

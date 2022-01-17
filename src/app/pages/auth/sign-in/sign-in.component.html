@@ -1,12 +1,9 @@
 <div class="container">
   <p class="title">Sign In For Work</p>
-  <div *ngIf="authCode === 'notExist'" class="authError">
-    <p>This user does not exist</p>
+  <div *ngIf="errorText" class="authError">
+    <p>{{errorText}}</p>
   </div>
-  <div *ngIf="authCode === 'incorrect'" class="authError">
-    <p>Password is not correct</p>
-  </div>
-  <form [formGroup]="form">
+  <form [formGroup]="form" *ngIf="!errorText">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput placeholder="pat@example.com"  formControlName="email">
@@ -25,8 +22,8 @@
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="getUserEmail()" [disabled]="form.invalid">Sign In</button>
+    <button mat-raised-button color="primary" (click)="signIn()" [disabled]="form.invalid">Sign In</button>
     <p>Don't have an account? <a [routerLink]="['/sign-up']">Sign Up!</a></p>
   </form>
-  <mat-spinner *ngIf="authCode === 'waiting'"></mat-spinner>
+  <mat-spinner *ngIf="errorText"></mat-spinner>
 </div>
