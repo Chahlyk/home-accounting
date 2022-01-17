@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "./layout/header/header.component";
 import { SidebarComponent } from "./layout/sidebar/sidebar.component";
 import { GuardsComponent } from "./guards/guards.component";
-import { InterceptorsComponent } from "./interceptors/interceptors.component";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { FirstInterceptor } from "./interceptors/first.interceptor";
 
 
 
@@ -12,10 +13,14 @@ import { InterceptorsComponent } from "./interceptors/interceptors.component";
     HeaderComponent,
     SidebarComponent,
     GuardsComponent,
-    InterceptorsComponent,
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: FirstInterceptor,
+    multi: true,
+  }]
 })
 export class SharedModule { }
