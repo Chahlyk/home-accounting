@@ -40,6 +40,7 @@ export class SignInComponent implements OnInit, OnDestroy {
           } else {
             if (user.password === data[0].password) {
               this.router.navigate(['/bill']);
+              localStorage.setItem('User', JSON.stringify(data[0]));
             } else {
               this.errorMessage('Password is not correct');
             }}

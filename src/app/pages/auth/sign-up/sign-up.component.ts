@@ -45,7 +45,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
                     this.router.navigate(['/sign-in'])
                 }
                 );
-              localStorage.setItem('User', JSON.stringify(user));
             }
         })
     );
