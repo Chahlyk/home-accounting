@@ -32,12 +32,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   public signUp(): void {
-    const form = {...this.form.value}
-    const user: IUser = {name: form.name, password: form.password, email: form.email}
+    const user = {...this.form.value}
+    delete user.check;
     this.sub.add(
       this.authService.getUser(user.email)
         .subscribe((data: Array<IUser>) => {
-            if (data.length != 0) {
+            if (data.length !== 0) {
               this.errorMessage('User with this mail is already registered');
             } else {
               this.authService.createUser(user)
@@ -45,6 +45,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
                     this.router.navigate(['/sign-in'])
                 }
                 );
+              localStorage.setItem('User', JSON.stringify(user));
             }
         })
     );
