@@ -12,7 +12,11 @@ export class FirstInterceptor implements HttpInterceptor {
 
   constructor() {}
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request);
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const cloneReq = req.clone({
+      url: req.url.replace('', 'http://localhost:3000/'),
+    })
+    return next.handle(cloneReq);
   }
 }
+

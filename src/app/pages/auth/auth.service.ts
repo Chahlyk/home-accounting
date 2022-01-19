@@ -11,10 +11,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public getUser(email: string): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`http://localhost:3000/users?email=${email}`);
+    return this.http.get<IUser[]>(`users?email=${email}`);
   }
 
   public createUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>('http://localhost:3000/users', user);
+    return this.http.post<IUser>('users', user);
   }
+
 }
