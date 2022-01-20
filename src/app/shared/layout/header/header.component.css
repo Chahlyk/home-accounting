@@ -1,3 +1,14 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.smallPoint {
+  font-size: 8px;
+  text-align: right;
+  margin: 10px 10px 0 0;
+  width: 0;
+}
+
+.example-icon:last-child {
+  margin-left: 10px;
+}

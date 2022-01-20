@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IUser } from "../../interfaces";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,11 +8,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  @ViewChild('drawer', {static: false})
+  public drawer: any;
 
+  public ngOnInit(): void {
+    this.getUser();
+  }
 
-  constructor() { }
+  public show(): void {
+    this.drawer.toggle();
+  }
 
-  ngOnInit(): void {
+  public userData!: IUser;
+
+  public getUser(): void {
+    this.userData = JSON.parse(<string>localStorage.getItem('User'));
   }
 
 }

@@ -12,6 +12,8 @@ import { CommonModule } from "@angular/common";
 import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
 
 
 @NgModule( {
@@ -27,7 +29,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   exports: [
     MatSliderModule,
@@ -39,6 +43,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatInputModule,
     MatCheckboxModule,
     MatFormFieldModule,
+    MatSidenavModule,
+    MatListModule,
   ]
 })
 export class MaterialModule { }

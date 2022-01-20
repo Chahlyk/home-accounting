@@ -1,13 +1,21 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button mat-icon-button class="example-icon" (click)="sidebar.show()" aria-label="Example icon-button with menu icon">
     <mat-icon >menu</mat-icon>
   </button>
   <span>Home accounting</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
+  <mat-icon class="smallPoint">fiber_manual_record</mat-icon>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with setting icon">
+    <mat-icon>settings</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
+  <mat-icon class="smallPoint">fiber_manual_record</mat-icon>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with help icon">
+    <mat-icon>help_outline</mat-icon>
+  </button>
+  <mat-icon class="smallPoint">fiber_manual_record</mat-icon>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with identity icon">
+    <mat-icon>perm_identity</mat-icon>
   </button>
 </mat-toolbar>
+<app-sidebar #sidebar></app-sidebar>
+

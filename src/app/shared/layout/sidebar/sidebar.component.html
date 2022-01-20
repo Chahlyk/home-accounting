@@ -1,12 +1,22 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
+    <div class="userInfo">
+      <p class="name">{{userData.name}}</p>
+      <p class="email">{{userData.email}}</p>
+      <img src="./assets/vaas.jpg" class="avatar" alt="avatar">
+    </div>
+    <mat-divider></mat-divider>
+    <mat-list>
+      <mat-list-item class="page">Pages</mat-list-item>
+    </mat-list>
+    <mat-nav-list>
+      <a routerLinkActive="active" [routerLink]="['/bill']" mat-list-item>Billing Page</a>
+      <a routerLinkActive="active" [routerLink]="['/history']" mat-list-item >History Page</a>
+      <a routerLinkActive="active" [routerLink]="['/record']" mat-list-item >Record Page</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
   </mat-drawer>
-
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
-  </div>
-
 </mat-drawer-container>
+
+
+

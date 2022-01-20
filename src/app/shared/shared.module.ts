@@ -5,10 +5,8 @@ import { SidebarComponent } from "./layout/sidebar/sidebar.component";
 import { GuardsComponent } from "./guards/guards.component";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FirstInterceptor } from "./interceptors/first.interceptor";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import { MatSidenavModule } from "@angular/material/sidenav";
+import { MaterialModule } from "./material.module";
+import { AppRoutingModule } from "../app-routing.module";
 
 const INTERCEPTOR_PROVIDER: Provider = { // <=== здесь
   provide: HTTP_INTERCEPTORS,
@@ -22,13 +20,11 @@ const INTERCEPTOR_PROVIDER: Provider = { // <=== здесь
     SidebarComponent,
     GuardsComponent,
   ],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        AppRoutingModule,
+    ],
   exports: [
     HeaderComponent,
     SidebarComponent
