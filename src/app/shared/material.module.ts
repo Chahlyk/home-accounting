@@ -14,6 +14,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule( {
@@ -32,6 +33,7 @@ import { MatListModule } from "@angular/material/list";
     MatCheckboxModule,
     MatSidenavModule,
     MatListModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatSliderModule,
@@ -45,6 +47,7 @@ import { MatListModule } from "@angular/material/list";
     MatFormFieldModule,
     MatSidenavModule,
     MatListModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class MaterialModule { }

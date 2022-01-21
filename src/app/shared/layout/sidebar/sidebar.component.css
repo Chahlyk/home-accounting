@@ -1,6 +1,11 @@
-.example-container {
+.container {
   width: 100%;
   height: 100%;
+}
+
+.sidenav {
+  background-color: #c5d4e6;
+  width: 300px;
 }
 
 .userInfo {
@@ -12,27 +17,19 @@
   align-items: center;
 }
 
-.mat-drawer {
-  width: 300px;
+.userName {
+  font-size: 24px;
+  margin: 12px;
 }
 
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+.userEmail {
+  color: dimgray;
 }
 
-.example-sidenav {
-  background-color: #c5d4e6;
-}
-
-.mat-list-base {
-  padding-top: 0;
-}
-
-.mat-list-item {
-  color: #2a2a2a;
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
 }
 
 .page {
@@ -45,17 +42,16 @@
   color: white;
 }
 
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+.mat-list-base {
+  padding-top: 0;
 }
 
-.name {
-  font-size: 24px;
-  margin: 12px;
+.mat-list-item {
+  color: #2a2a2a;
 }
 
-.email {
-  color: dimgray;
-}
+
+
+
+
+

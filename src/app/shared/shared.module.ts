@@ -8,7 +8,7 @@ import { FirstInterceptor } from "./interceptors/first.interceptor";
 import { MaterialModule } from "./material.module";
 import { AppRoutingModule } from "../app-routing.module";
 
-const INTERCEPTOR_PROVIDER: Provider = { // <=== здесь
+const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
   useClass: FirstInterceptor,
   multi: true
@@ -20,11 +20,11 @@ const INTERCEPTOR_PROVIDER: Provider = { // <=== здесь
     SidebarComponent,
     GuardsComponent,
   ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        AppRoutingModule,
-    ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    AppRoutingModule,
+  ],
   exports: [
     HeaderComponent,
     SidebarComponent

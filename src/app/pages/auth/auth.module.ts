@@ -6,7 +6,6 @@ import { AuthRoutingModule } from "./auth-routing.module";
 import { AuthComponent } from "./auth.component";
 import { MaterialModule } from "../../shared/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -21,7 +20,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule,
   ]
 })
 export class AuthModule { }

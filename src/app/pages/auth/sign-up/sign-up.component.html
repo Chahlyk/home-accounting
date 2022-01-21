@@ -1,4 +1,4 @@
-<div class="container">
+<div>
   <p class="title">Registration for access</p>
   <div *ngIf="errorText" class="authError">
     <p>{{errorText}}</p>
@@ -28,7 +28,7 @@
       <mat-error *ngIf="form.get('name')?.errors?.['required']">Field is required</mat-error>
     </mat-form-field>
     <div class="buttons">
-      <mat-checkbox class="example-margin" formControlName="check">I agree with the rules</mat-checkbox>
+      <mat-checkbox formControlName="check">I agree with the rules</mat-checkbox>
       <button mat-raised-button color="primary" (click)="signUp()" [disabled]="form.invalid">Sign Up</button>
     </div>
     <p>Already have an account? <a [routerLink]="['/sign-in']">Sign In!</a></p>

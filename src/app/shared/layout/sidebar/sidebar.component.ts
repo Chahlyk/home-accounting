@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IUser } from "../../interfaces";
 
 @Component({
@@ -9,7 +9,8 @@ import { IUser } from "../../interfaces";
 export class SidebarComponent implements OnInit {
 
   @ViewChild('drawer', {static: false})
-  public drawer: any;
+  public drawer: ElementRef|any;
+  public userData!: IUser;
 
   public ngOnInit(): void {
     this.getUser();
@@ -19,9 +20,7 @@ export class SidebarComponent implements OnInit {
     this.drawer.toggle();
   }
 
-  public userData!: IUser;
-
-  public getUser(): void {
+  private getUser(): void {
     this.userData = JSON.parse(<string>localStorage.getItem('User'));
   }
 
