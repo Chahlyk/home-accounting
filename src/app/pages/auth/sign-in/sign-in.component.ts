@@ -33,8 +33,9 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   public signIn(): void {
     const user = {...this.form.value}
-    this.authService.getUser(user.email)
-      .subscribe((data: IUser[]) => {
+    this.sub.add(
+      this.authService.getUser(user.email)
+        .subscribe((data: IUser[]) => {
           if (data.length === 0) {
             this.errorMessage( 'This user does not exist');
           } else {
@@ -44,7 +45,8 @@ export class SignInComponent implements OnInit, OnDestroy {
             } else {
               this.errorMessage('Password is not correct');
             }}
-      })
+        })
+    )
   }
 
   private errorMessage(text: string): void {

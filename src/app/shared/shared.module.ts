@@ -20,11 +20,11 @@ const INTERCEPTOR_PROVIDER: Provider = {
     SidebarComponent,
     GuardsComponent,
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    AppRoutingModule,
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        AppRoutingModule,
+    ],
   exports: [
     HeaderComponent,
     SidebarComponent

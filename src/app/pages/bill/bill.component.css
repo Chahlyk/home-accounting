@@ -1,0 +1,17 @@
+.container {
+  padding: 30px 20px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title p {
+  font-size: 24px;
+  color: #2a2a2a;
+}
+
+table {
+  width: 100%;
+}
