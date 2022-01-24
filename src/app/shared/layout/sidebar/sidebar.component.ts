@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { IUser } from "../../interfaces";
+import { Component, OnInit } from '@angular/core';
+import { IUser } from "../../../pages/auth/auth.interface";
 
 @Component({
   selector: 'app-sidebar',
@@ -8,17 +8,12 @@ import { IUser } from "../../interfaces";
 })
 export class SidebarComponent implements OnInit {
 
-  @ViewChild('drawer', {static: false})
-  public drawer: ElementRef|any;
   public userData!: IUser;
 
   public ngOnInit(): void {
     this.getUser();
   }
 
-  public show(): void {
-    this.drawer.toggle();
-  }
 
   private getUser(): void {
     this.userData = JSON.parse(<string>localStorage.getItem('User'));

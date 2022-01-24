@@ -20,7 +20,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 @NgModule( {
   imports: [
     CommonModule,
-    BrowserModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatButtonModule,

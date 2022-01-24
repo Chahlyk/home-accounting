@@ -1,36 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ICurrency } from "../../shared/interfaces";
-import { BillService } from "./bill.service";
-import { Subscription } from "rxjs";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-bill',
   templateUrl: './bill.component.html',
   styleUrls: ['./bill.component.css']
 })
-export class BillComponent implements OnInit, OnDestroy {
+export class BillComponent implements OnInit {
 
-  public rate!: ICurrency;
-  private sub: Subscription = new Subscription();
+  public constructor() { }
 
-
-  public constructor(private billService: BillService) { }
-
-  public ngOnInit(): void {
-    this.getRate();
-  }
-
-  public ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
-  private getRate(): void {
-    this.sub.add(
-      this.billService.getRate()
-        .subscribe((data: ICurrency) => {
-          this.rate = data;
-        })
-    )
-  }
+  public ngOnInit(): void {}
 
 }

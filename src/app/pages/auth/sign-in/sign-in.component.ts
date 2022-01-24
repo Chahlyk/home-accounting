@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
-import { IUser } from "../../../shared/interfaces";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { IUser } from "../auth.interface";
 
 @Component({
   selector: 'app-sign-in',
@@ -40,7 +40,7 @@ export class SignInComponent implements OnInit, OnDestroy {
             this.errorMessage( 'This user does not exist');
           } else {
             if (user.password === data[0].password) {
-              this.router.navigate(['/bill']);
+              this.router.navigate(['/pages']);
               localStorage.setItem('User', JSON.stringify(data[0]));
             } else {
               this.errorMessage('Password is not correct');

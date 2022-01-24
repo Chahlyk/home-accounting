@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
-import { IUser } from "../../../shared/interfaces";
+import { IUser } from "../auth.interface";
 
 @Component({
   selector: 'app-sign-up',

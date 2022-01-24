@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
-import { BillComponent } from "./pages/bill/bill.component";
-import { HistoryComponent } from "./pages/history/history.component";
-import { RecordComponent } from "./pages/record/record.component";
+import { LayoutComponent } from "./shared/layout/layout.component";
+import { BillComponent } from './pages/bill/bill.component';
 
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
   { path: 'auth', loadChildren: () => import('./pages/auth/auth.module').then(mod => mod.AuthModule) },
-  { path: 'bill', component: BillComponent},
-  { path: 'history', component: HistoryComponent},
-  { path: 'record', component: RecordComponent},
+  { path: 'pages', component: LayoutComponent, children: [
+      { path: '', redirectTo: '/bill', pathMatch: 'full' },
+      { path: 'bill', loadChildren: () => import('./pages/bill/bill.module').then(mod => mod.BillModule) },
+    ] },
+
 ];
 
 @NgModule({

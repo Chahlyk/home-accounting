@@ -2,11 +2,11 @@ import { NgModule, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "./layout/header/header.component";
 import { SidebarComponent } from "./layout/sidebar/sidebar.component";
-import { GuardsComponent } from "./guards/guards.component";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FirstInterceptor } from "./interceptors/first.interceptor";
 import { MaterialModule } from "./material.module";
-import { AppRoutingModule } from "../app-routing.module";
+import { LayoutComponent } from "./layout/layout.component";
+import { RouterModule } from "@angular/router";
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -18,16 +18,17 @@ const INTERCEPTOR_PROVIDER: Provider = {
   declarations: [
     HeaderComponent,
     SidebarComponent,
-    GuardsComponent,
+    LayoutComponent,
   ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        AppRoutingModule,
-    ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    RouterModule,
+  ],
   exports: [
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    LayoutComponent,
   ],
   providers: [ INTERCEPTOR_PROVIDER ]
 })
