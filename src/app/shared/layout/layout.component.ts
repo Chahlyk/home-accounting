@@ -7,12 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  public state!: boolean;
 
-  ngOnInit(): void {
+  public onClick(state: boolean): void {
+    this.state = state;
   }
 
-  public show(): void {
+  public ngOnInit(): void {
   }
 
 }

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from "./shared/shared.module";
 import { AuthModule } from "./pages/auth/auth.module";
 import { HttpClientModule } from "@angular/common/http";
+import { BillModule } from './pages/bill/bill.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from "@angular/common/http";
     MaterialModule,
     SharedModule,
     AuthModule,
+    BillModule,
     AppRoutingModule,
   ],
   providers: [],

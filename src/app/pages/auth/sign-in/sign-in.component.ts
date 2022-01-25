@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../auth.service";
-import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { IUser } from "../auth.interface";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { IUser } from '../auth.interface';
 
 @Component({
   selector: 'app-sign-in',
@@ -32,7 +32,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   public signIn(): void {
-    const user = {...this.form.value}
+    const user = {...this.form.value};
     this.sub.add(
       this.authService.getUser(user.email)
         .subscribe((data: IUser[]) => {
@@ -46,21 +46,21 @@ export class SignInComponent implements OnInit, OnDestroy {
               this.errorMessage('Password is not correct');
             }}
         })
-    )
+    );
   }
 
   private errorMessage(text: string): void {
     this.errorText = text;
     setTimeout(() => {
       this.errorText = '';
-    }, 5000)
+    }, 5000);
   }
 
   private buildForm(): void {
     this.form = new FormGroup( {
       email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [Validators.minLength(6) ,Validators.required]),
-    })
+      password: new FormControl('', [Validators.minLength(6) , Validators.required]),
+    });
   }
 
 }

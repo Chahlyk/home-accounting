@@ -1,3 +1,3 @@
-<app-header></app-header>
-<app-sidebar></app-sidebar>
+<app-header (clickChange)="onClick($event)"></app-header>
+<app-sidebar [showState]="state"></app-sidebar>
 <router-outlet></router-outlet>

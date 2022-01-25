@@ -7,6 +7,7 @@ import { FirstInterceptor } from "./interceptors/first.interceptor";
 import { MaterialModule } from "./material.module";
 import { LayoutComponent } from "./layout/layout.component";
 import { RouterModule } from "@angular/router";
+import { BillModule } from '../pages/bill/bill.module';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,

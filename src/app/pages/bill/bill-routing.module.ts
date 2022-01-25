@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/bill', pathMatch: 'full' },
   { path: 'bill', component: BillComponent }
 ]
 

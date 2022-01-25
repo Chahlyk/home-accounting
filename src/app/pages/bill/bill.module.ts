@@ -1,24 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from "../../shared/shared.module";
-import { MaterialModule } from "../../shared/material.module";
 import { BillComponent } from "./bill.component";
-import { MatTableModule } from "@angular/material/table";
+import { BillRoutingModule } from './bill-routing.module';
 
 
 
-@NgModule( {
+@NgModule({
   declarations: [
-    BillComponent
-  ],
-  exports: [
     BillComponent
   ],
   imports: [
     CommonModule,
-    SharedModule,
-    MaterialModule,
-    MatTableModule,
+    BillRoutingModule,
   ]
 })
 export class BillModule { }

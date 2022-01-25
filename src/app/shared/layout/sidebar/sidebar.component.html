@@ -1,5 +1,5 @@
 <mat-drawer-container class="container" autosize>
-  <mat-drawer class="sidenav" mode="side">
+  <mat-drawer [(opened)]="showState" class="sidenav" mode="side">
     <div class="userInfo">
       <p class="userName">{{userData.name}}</p>
       <p class="userEmail">{{userData.email}}</p>
