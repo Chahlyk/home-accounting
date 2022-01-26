@@ -1,12 +1,12 @@
 import { BillComponent } from './bill.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BillGuard } from '../../shared/guards/bill.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/bill', pathMatch: 'full' },
-  { path: 'bill', component: BillComponent }
-]
+  { path: 'bill', component: BillComponent, canActivate: [BillGuard] },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
