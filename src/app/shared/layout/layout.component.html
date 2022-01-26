@@ -1,5 +1,7 @@
 <app-header (clickChange)="onClick($event)"></app-header>
-<app-sidebar [showState]="state">
-  <router-outlet></router-outlet>
-</app-sidebar>
-
+<mat-drawer-container class="container" autosize>
+  <app-sidebar [showState]="state"></app-sidebar>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
