@@ -13,7 +13,17 @@
     <mat-icon>help_outline</mat-icon>
   </button>
   <mat-icon class="smallPoint">fiber_manual_record</mat-icon>
-  <button mat-icon-button class="icon">
+  <button mat-icon-button class="icon" [matMenuTriggerFor]="menu">
     <mat-icon>perm_identity</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>note_add</mat-icon>
+      Make a record
+    </button>
+    <button mat-menu-item (click)="exit()">
+      <mat-icon>exit_to_app</mat-icon>
+      Exit
+    </button>
+  </mat-menu>
 </mat-toolbar>
