@@ -1,6 +1,6 @@
 <div>
   <p>Sign In For Work</p>
-  <div *ngIf="errorText" class="authError">
+  <div *ngIf="errorText" class="auth-error">
     <p>{{errorText}}</p>
   </div>
   <form [formGroup]="form" *ngIf="!errorText">
@@ -23,7 +23,7 @@
       </button>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="signIn()" [disabled]="form.invalid">Sign In</button>
-    <p>Don't have an account? <a [routerLink]="['/sign-up']">Sign Up!</a></p>
+    <p>Don't have an account? <a [routerLink]="['/auth/sign-up']">Sign Up!</a></p>
   </form>
   <mat-spinner *ngIf="errorText"></mat-spinner>
 </div>

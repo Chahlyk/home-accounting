@@ -7,7 +7,7 @@ a {
   font-weight: bold;
 }
 
-.authError {
+.auth-error {
   margin: 20px;
   background: red;
   color: white;
@@ -41,6 +41,31 @@ form {
 
 .mat-spinner {
   margin: 40px 190px;
+}
+
+@media all
+and (max-width: 1300px)
+and (max-height: 1080px)
+and (min-width: 400px) {
+  * {
+    font-size: 16px;
+  }
+
+  .mat-raised-button {
+    width: 90px;
+    height: 40px;
+    margin: 20px 0;
+  }
+
+  .mat-spinner {
+    margin: 25px 90px;
+  }
+
+  .mat-error,
+  .mat-hint {
+    font-size: 11px;
+  }
+
 }
 
 

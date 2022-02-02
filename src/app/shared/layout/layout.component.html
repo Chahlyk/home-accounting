@@ -1,7 +1,11 @@
 <app-header (clickChange)="onClick($event)"></app-header>
-<mat-drawer-container class="container" autosize>
-  <app-sidebar [showState]="state"></app-sidebar>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" [opened]="state">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
   <mat-drawer-content>
-    <router-outlet></router-outlet>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

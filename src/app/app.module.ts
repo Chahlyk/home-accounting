@@ -5,10 +5,8 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './pages/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
-import { BillModule } from './pages/bill/bill.module';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +16,8 @@ import { BillModule } from './pages/bill/bill.module';
     BrowserModule,
     MaterialModule,
     SharedModule,
-    AuthModule,
-    BillModule,
     AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

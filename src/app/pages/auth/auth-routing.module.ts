@@ -7,7 +7,7 @@ import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
   { path: '', component: AuthComponent, children: [
-    { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
+    { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
     { path: 'sign-in', component: SignInComponent },
     { path: 'sign-up', component: SignUpComponent },
   ]},

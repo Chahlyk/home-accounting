@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   public exit(): void {
     localStorage.removeItem('User');
-    this.router.navigate(['/sign-in']);
+    this.router.navigate(['/auth/sign-in']);
   }
 
   public ngOnInit(): void {

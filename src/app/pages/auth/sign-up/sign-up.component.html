@@ -1,6 +1,6 @@
 <div>
   <p class="title">Registration for access</p>
-  <div *ngIf="errorText" class="authError">
+  <div *ngIf="errorText" class="auth-error">
     <p>{{errorText}}</p>
   </div>
   <form [formGroup]="form" *ngIf="!errorText">
@@ -31,7 +31,7 @@
       <mat-checkbox formControlName="check">I agree with the rules</mat-checkbox>
       <button mat-raised-button color="primary" (click)="signUp()" [disabled]="form.invalid">Sign Up</button>
     </div>
-    <p>Already have an account? <a [routerLink]="['/sign-in']">Sign In!</a></p>
+    <p>Already have an account? <a [routerLink]="['/auth/sign-in']">Sign In!</a></p>
   </form>
   <mat-spinner *ngIf="errorText"></mat-spinner>
 </div>

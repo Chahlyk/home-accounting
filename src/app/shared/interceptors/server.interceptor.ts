@@ -8,7 +8,7 @@ import {
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class FirstInterceptor implements HttpInterceptor {
+export class ServerInterceptor implements HttpInterceptor {
 
   constructor() {}
 
