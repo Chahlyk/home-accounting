@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @Output() public clickChange: EventEmitter<boolean> = new EventEmitter();
 
@@ -23,9 +23,6 @@ export class HeaderComponent implements OnInit {
   public exit(): void {
     localStorage.removeItem('User');
     this.router.navigate(['/auth/sign-in']);
-  }
-
-  public ngOnInit(): void {
   }
 
 }

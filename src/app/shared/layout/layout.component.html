@@ -1,10 +1,10 @@
 <app-header (clickChange)="onClick($event)"></app-header>
-<mat-drawer-container class="example-container">
+<mat-drawer-container>
   <mat-drawer mode="side" [opened]="state">
     <app-sidebar></app-sidebar>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="container">
+    <div>
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>

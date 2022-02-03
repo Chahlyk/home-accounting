@@ -1,3 +1,13 @@
-mat-drawer-content {
-  height: 513px;
+mat-drawer-container {
+  position: absolute;
+  bottom: 0;
+  top: 64px;
+  left: 0;
+  right: 0;
 }
+
+mat-drawer-content {
+  background-color: ghostwhite;;
+}
+
+

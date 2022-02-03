@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { AuthService } from "../auth.service";
-import { Router } from "@angular/router";
-import { IUser } from "../auth.interface";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { IUser } from '../auth.interface';
 
 @Component({
   selector: 'app-sign-up',
@@ -32,17 +32,17 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   public signUp(): void {
-    const user = {...this.form.value}
+    const user = {...this.form.value};
     delete user.check;
     this.sub.add(
       this.authService.getUser(user.email)
-        .subscribe((data: Array<IUser>) => {
+        .subscribe((data: IUser[]) => {
             if (data.length !== 0) {
               this.errorMessage('User with this mail is already registered');
             } else {
               this.authService.createUser(user)
                 .subscribe(() => {
-                    this.router.navigate(['/sign-in'])
+                    this.router.navigate(['/sign-in']);
                 }
                 );
             }
@@ -54,16 +54,16 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.errorText = text;
     setTimeout(() => {
       this.errorText = '';
-    }, 5000)
+    }, 5000);
   }
 
   private buildForm(): void {
     this.form = new FormGroup( {
       email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [Validators.minLength(6) ,Validators.required]),
+      password: new FormControl('', [Validators.minLength(6), Validators.required]),
       name: new FormControl('', Validators.required),
       check: new FormControl(false, Validators.requiredTrue)
-    })
+    });
   }
 
 }

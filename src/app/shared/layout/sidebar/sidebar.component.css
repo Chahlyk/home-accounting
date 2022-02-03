@@ -1,6 +1,6 @@
 .container {
   width: 300px;
-  background-color: #c5d4e6;
+  background-color: #eaf1ff;;
   height: 100%;
 }
 
@@ -28,9 +28,23 @@
   border-radius: 50%;
 }
 
+.mat-list-base {
+  padding-top: 0;
+}
+
 .page {
-  font-size: 16px;
+  font-size: 14px;
   color: dimgray;
+}
+
+.mat-nav-list {
+  display: flex;
+  flex-flow: column;
+}
+
+.mat-nav-list a {
+  padding: 10px 15px;
+  font-size: 16px;
 }
 
 .active {
@@ -38,13 +52,9 @@
   color: white;
 }
 
-.mat-list-base {
-  padding-top: 0;
-}
 
-.mat-list-item {
-  color: #2a2a2a;
-}
+
+
 
 
 

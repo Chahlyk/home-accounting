@@ -12,10 +12,10 @@ export class ServerInterceptor implements HttpInterceptor {
 
   constructor() {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const cloneReq = req.clone({
       url: req.url.replace('', 'http://localhost:3000/'),
-    })
+    });
     return next.handle(cloneReq);
   }
 }

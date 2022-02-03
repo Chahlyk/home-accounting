@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IUser } from '../../../pages/auth/auth.interface';
 
 
@@ -8,8 +8,6 @@ import { IUser } from '../../../pages/auth/auth.interface';
   styleUrls: [ './sidebar.component.css' ]
 } )
 export class SidebarComponent implements OnInit {
-
-  @Input() public showState!: boolean;
 
   public userData!: IUser;
 
