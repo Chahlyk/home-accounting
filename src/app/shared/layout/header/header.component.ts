@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {Router} from '@angular/router';
+import {AuthService} from '../../../pages/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ export class HeaderComponent {
 
   public showState: boolean = true;
 
-  constructor(private router: Router) {
+  constructor(private authService: AuthService) {
   }
 
   public show(): void {
@@ -20,9 +20,8 @@ export class HeaderComponent {
     this.clickChange.emit(this.showState);
   }
 
-  public exit(): void {
-    localStorage.removeItem('User');
-    this.router.navigate(['/auth/sign-in']);
+  public signOut(): void {
+    this.authService.signOut();
   }
 
 }
