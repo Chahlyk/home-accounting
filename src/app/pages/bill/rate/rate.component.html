@@ -1,21 +1,25 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="container">
+  <div class="title">
+    <p>Rate</p>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="currency">
-    <th mat-header-cell *matHeaderCellDef>Currency</th>
-    <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
-  </ng-container>
+    <ng-container matColumnDef="currency">
+      <th mat-header-cell *matHeaderCellDef>Currency</th>
+      <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="rate">
-    <th mat-header-cell *matHeaderCellDef>Rate</th>
-    <td mat-cell *matCellDef="let element"> {{element.rate}} </td>
-  </ng-container>
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef>Rate</th>
+      <td mat-cell *matCellDef="let element"> {{element.rate}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef>Date</th>
-    <td mat-cell *matCellDef="let element"> {{element.date | date: 'M.d.yy'}} </td>
-  </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date: 'M.d.yy'}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

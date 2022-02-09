@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IBill, ICurrency} from './bill.interface';
 import {BillService} from './bill.service';
 import {Subscription} from 'rxjs';
 
@@ -9,9 +8,6 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./bill.component.css']
 })
 export class BillComponent implements OnInit, OnDestroy {
-
-  public bill!: IBill;
-  public currency!: ICurrency;
 
   private sub: Subscription = new Subscription();
 
@@ -31,7 +27,7 @@ export class BillComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.billService.getBill()
         .subscribe(data => {
-          this.bill = data;
+          localStorage.setItem('Bill', JSON.stringify(data));
         })
     );
   }
@@ -40,7 +36,7 @@ export class BillComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.billService.getCurrency()
         .subscribe(data => {
-          this.currency = data;
+          localStorage.setItem('Currency', JSON.stringify(data));
         })
     );
   }

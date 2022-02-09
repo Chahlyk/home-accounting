@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ICurrency, IP} from '../bill.interface';
+import {Component, OnInit} from '@angular/core';
+import {ICurrency, IRate} from '../bill.interface';
 
 @Component({
   selector: 'app-rate',
@@ -8,25 +8,22 @@ import {ICurrency, IP} from '../bill.interface';
 })
 export class RateComponent implements OnInit {
 
-  @Input() public rate!: ICurrency;
-
   public displayedColumns: string[] = ['currency', 'rate', 'date'];
-  public dataSource: IP[] = [];
+  public dataSource: IRate[] = [];
+  public rate!: ICurrency;
 
   constructor() { }
 
   public ngOnInit(): void {
-    this.dataSourceBuilder();
-    console.log(this.dataSource);
+    this.getCurrency();
   }
 
-  public dataSourceBuilder(): void {
-    setTimeout(() => {
-      const data: any = this.rate.rates;
-      for (const val in data) {
-        this.dataSource.push({currency: val, rate: data[val], date: this.rate.date});
-      }
-    }, 500);
+  private getCurrency(): void {
+    this.rate = JSON.parse(localStorage.getItem('Currency') as string);
+    const data: any = this.rate.rates;
+    for (const val in data) {
+      this.dataSource.push({currency: val, rate: data[val], date: this.rate.date});
+    }
   }
 
 }

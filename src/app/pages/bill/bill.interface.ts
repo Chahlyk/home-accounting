@@ -18,7 +18,7 @@ export interface IRates {
   BYN: number;
 }
 
-export interface IP {
+export interface IRate {
   currency: string;
   rate: any;
   date: any;
