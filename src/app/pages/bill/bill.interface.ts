@@ -4,11 +4,11 @@ export interface IBill {
 }
 
 export interface ICurrency {
-  base: string;
+  base?: string;
   date: string;
   rates: IRates;
-  success: boolean;
-  timestamp: number;
+  success?: boolean;
+  timestamp?: number;
 }
 
 export interface IRates {

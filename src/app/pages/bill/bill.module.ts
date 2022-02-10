@@ -5,7 +5,6 @@ import { BillRoutingModule } from './bill-routing.module';
 import {MaterialModule} from '../../shared/material.module';
 import { CountComponent } from './count/count.component';
 import { RateComponent } from './rate/rate.component';
-import {MatTableModule} from '@angular/material/table';
 
 
 @NgModule({
@@ -17,11 +16,10 @@ import {MatTableModule} from '@angular/material/table';
   exports: [
     BillComponent
   ],
-    imports: [
-        CommonModule,
-        BillRoutingModule,
-        MaterialModule,
-        MatTableModule,
-    ]
+  imports: [
+      CommonModule,
+      BillRoutingModule,
+      MaterialModule,
+  ]
 })
 export class BillModule { }

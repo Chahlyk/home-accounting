@@ -1,0 +1,27 @@
+.container {
+  width: 400px;
+  background: #fff;
+  height: 300px;
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+.title {
+  font-size: 20px;
+  width: 80%;
+  color: rgba(0,0,0,.54);
+}
+
+.mat-table {
+  box-shadow: none;
+  width: 85%;
+}
+
+td {
+  width: 50%;
+}
