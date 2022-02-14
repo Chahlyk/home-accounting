@@ -4,16 +4,13 @@
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="currency">
-      <th mat-header-cell *matHeaderCellDef>Currency</th>
-      <td mat-cell *matCellDef="let element"> {{element.currency}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="value">
       <th mat-header-cell *matHeaderCellDef>Rate</th>
-      <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+      <td mat-cell *matCellDef="let element" [ngStyle]="{'border-bottom-color': element.currency === 'EUR' ? '#3f51b5' : 'rgba(0,0,0,.12);'}">
+        {{element.currency}} {{element.value}} </td>
     </ng-container>
 
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+

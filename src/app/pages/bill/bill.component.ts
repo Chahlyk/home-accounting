@@ -23,7 +23,7 @@ export class BillComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  private getBill(): void {
+  public getBill(): void {
     this.sub.add(
       this.billService.getBill()
         .subscribe(data => {
@@ -32,7 +32,7 @@ export class BillComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getCurrency(): void {
+  public getCurrency(): void {
     this.sub.add(
       this.billService.getCurrency()
         .subscribe(data => {

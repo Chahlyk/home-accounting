@@ -8,7 +8,7 @@ import {IBill } from '../bill.interface';
 })
 export class CountComponent implements OnInit {
 
-  public displayedColumns: string[] = ['currency', 'value'];
+  public displayedColumns: string[] = ['value'];
   public dataSource: IBill[] = [];
   private value!: number;
 
@@ -18,7 +18,7 @@ export class CountComponent implements OnInit {
     this.getBill();
   }
 
-  public getBill(): void {
+  private getBill(): void {
     let bill!: any;
     let value!: IBill;
     value = JSON.parse(localStorage.getItem('Bill') as string);
