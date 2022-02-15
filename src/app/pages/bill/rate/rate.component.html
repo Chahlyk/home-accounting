@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" *ngIf="show">
   <div class="title">
     <p>Rate</p>
   </div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="currency">
       <th mat-header-cell *matHeaderCellDef>Currency</th>

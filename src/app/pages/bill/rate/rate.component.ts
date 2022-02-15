@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {ICurrency, IRate} from '../bill.interface';
 
 @Component({
@@ -6,23 +6,27 @@ import {ICurrency, IRate} from '../bill.interface';
   templateUrl: './rate.component.html',
   styleUrls: ['./rate.component.css']
 })
-export class RateComponent implements OnInit {
+export class RateComponent implements OnChanges {
+
+  @Input() public currency!: ICurrency;
 
   public displayedColumns: string[] = ['currency', 'rate', 'date'];
   public dataSource: IRate[] = [];
-  public rate!: ICurrency;
+  public show: boolean = false;
 
-  constructor() { }
-
-  public ngOnInit(): void {
+  public ngOnChanges(): void {
     this.getCurrency();
   }
 
   private getCurrency(): void {
-    this.rate = JSON.parse(localStorage.getItem('Currency') as string);
-    const data: any = this.rate.rates;
-    for (const val in data) {
-      this.dataSource.push({currency: val, rate: data[val], date: this.rate.date});
+    if (this.currency !== undefined) {
+      this.show = true;
+      const data: any = this.currency.rates;
+      for (const val in data) {
+        this.dataSource.push({currency: val, rate: data[val], date: this.currency.date});
+      }
+    } else {
+      return;
     }
   }
 
