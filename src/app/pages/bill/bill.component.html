@@ -6,9 +6,14 @@
     </button>
   </div>
   <mat-divider></mat-divider>
-  <div class="tables">
-    <app-count [bill]="bill" [currency]="currency"></app-count>
-    <app-rate [currency]="currency"></app-rate>
+  <div class="tables" *ngIf="show">
+    <app-count [amount]="amount"></app-count>
+    <app-rate [dataSource]="dataSource"></app-rate>
+  </div>
+  <div class="loading" *ngIf="!show">
+    <p>loading...</p>
   </div>
 </div>
+
+
 

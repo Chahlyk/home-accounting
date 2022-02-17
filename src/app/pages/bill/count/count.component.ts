@@ -1,37 +1,13 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {IBill, ICurrency} from '../bill.interface';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-count',
   templateUrl: './count.component.html',
   styleUrls: ['./count.component.css']
 })
-export class CountComponent implements OnChanges {
+export class CountComponent {
 
-  @Input() public bill!: IBill;
-  @Input() public currency!: ICurrency;
+  @Input() public amount!: number[];
 
-  public amount: number [] = [];
-  public show: boolean = false;
-  private value!: number;
-
-
-  public ngOnChanges(): void {
-    this.getBill();
-  }
-
-  private getBill(): void {
-    if (this.bill !== undefined && this.currency != undefined) {
-      this.show = true;
-      let bill!: any;
-      this.value = this.bill.value;
-      bill = this.currency.rates;
-      for (const val in bill ) {
-        this.amount.push(bill[val] * this.value);
-      }
-    } else {
-      return;
-    }
-  }
 }
 
