@@ -3,21 +3,9 @@
     <p>Count</p>
   </div>
   <mat-list role="list">
-    <mat-list-item role="listitem">
-      <p class="currency">$</p>
-      <p>{{amount[0]}}</p>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <p class="currency">€</p>
-      <p>{{amount[1]}}</p>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <p class="currency">₴</p>
-      <p>{{amount[2]}}</p>
-    </mat-list-item>
-    <mat-list-item role="listitem">
-      <p class="currency">Br</p>
-      <p>{{amount[3]}}</p>
+    <mat-list-item role="listitem" *ngFor="let symbol of currencySymbols">
+      <p class="currency">{{symbol}}</p>
+      <p>{{amount[currencySymbols.indexOf(symbol)]}}</p>
     </mat-list-item>
   </mat-list>
 </div>

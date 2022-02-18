@@ -9,5 +9,7 @@ export class CountComponent {
 
   @Input() public amount!: number[];
 
+  public currencySymbols: string[] = ['$', '€', '₴', 'Br'];
+
 }
 
