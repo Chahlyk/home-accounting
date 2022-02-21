@@ -17,9 +17,9 @@ import { RateComponent } from './rate/rate.component';
     BillComponent
   ],
   imports: [
-      CommonModule,
-      BillRoutingModule,
-      MaterialModule,
+    CommonModule,
+    BillRoutingModule,
+    MaterialModule,
   ]
 })
 export class BillModule { }

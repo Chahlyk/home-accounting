@@ -1,13 +1,13 @@
 <div class="container">
   <div class="title">
     <p>Bill page</p>
-    <button mat-icon-button (click)="getCurrency(); getBill()">
+    <button mat-icon-button (click)="getBill()">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>
   <mat-divider></mat-divider>
   <div class="tables" *ngIf="show">
-    <app-count [amount]="amount"></app-count>
+    <app-count [count]="count"></app-count>
     <app-rate [dataSource]="dataSource"></app-rate>
   </div>
   <div class="loading" *ngIf="!show">

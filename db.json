@@ -33,12 +33,24 @@
   "currency": {
     "base": "base",
     "date": "01.01.2022 12:01",
-    "rates": {
-      "UAH": 30.44,
-      "EUR": 1,
-      "USD": 1.16,
-      "BYN": 2.82
-    },
+    "rates": [
+      {
+        "currency": "EUR",
+        "rate": 1
+      },
+      {
+        "currency": "UAH",
+        "rate": 30.44
+      },
+      {
+        "currency": "USD",
+        "rate": 1.16
+      },
+      {
+        "currency": "BYN",
+        "rate": 2.82
+      }
+    ],
     "success": true,
     "timestamp": 1
   },

@@ -7,9 +7,9 @@ import {Component, Input} from '@angular/core';
 })
 export class CountComponent {
 
-  @Input() public amount!: number[];
+  @Input() public count!: number[];
 
-  public currencySymbols: string[] = ['$', '€', '₴', 'Br'];
+  public currencySymbols: string[] = ['€', '₴', '$'];
 
 }
 

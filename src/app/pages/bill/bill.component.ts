@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BillService} from './bill.service';
 import {Subscription} from 'rxjs';
-import {IBill, ICurrency, IRate} from './bill.interface';
+import {IBill, ICurrency} from './bill.interface';
 
 @Component({
   selector: 'app-bill',
@@ -10,10 +10,8 @@ import {IBill, ICurrency, IRate} from './bill.interface';
 })
 export class BillComponent implements OnInit, OnDestroy {
 
-  public bill!: IBill;
-  public currency!: ICurrency;
-  public amount: number[] = [];
-  public dataSource: IRate[] = [];
+  public count: number[] = [];
+  public dataSource: object[] = [];
   public show: boolean = false;
   private value!: number;
   private sub: Subscription = new Subscription();
@@ -23,7 +21,6 @@ export class BillComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.getBill();
-    this.getCurrency();
   }
 
   public ngOnDestroy(): void {
@@ -33,45 +30,21 @@ export class BillComponent implements OnInit, OnDestroy {
   public getBill(): void {
     this.sub.add(
       this.billService.getBill()
-        .subscribe(data => {
-          this.bill = data;
-          this.getAmount();
-          this.getDataSource();
+        .subscribe((data: IBill) => {
+          this.value = data.value;
         })
     );
-  }
-
-  public getCurrency(): void {
     this.sub.add(
       this.billService.getCurrency()
-        .subscribe(data => {
-          this.currency = data;
-          this.getAmount();
-          this.getDataSource();
+        .subscribe((data: ICurrency) => {
+          for (const val of data.rates) {
+            this.dataSource.push({currency: val.currency, rate: val.rate, date: data.date});
+          }
+          this.count = (data.rates.map(item => item.rate * this.value)).slice(0, 3);
+          this.show = true;
         })
     );
-  }
 
-  private getDataSource(): void {
-    if (this.currency !== undefined) {
-      this.show = true;
-      const data: any = this.currency.rates;
-      for (const val in data) {
-        this.dataSource.push({currency: val, rate: data[val], date: this.currency.date});
-      }
-    }
-  }
-
-  private getAmount(): void {
-    if (this.bill !== undefined && this.currency !== undefined) {
-      this.show = true;
-      let bill!: any;
-      this.value = this.bill.value;
-      bill = this.currency.rates;
-      for (const val in bill ) {
-        this.amount.push(bill[val] * this.value);
-      }
-    }
   }
 
 }

@@ -5,7 +5,7 @@
   <mat-list role="list">
     <mat-list-item role="listitem" *ngFor="let symbol of currencySymbols">
       <p class="currency">{{symbol}}</p>
-      <p>{{amount[currencySymbols.indexOf(symbol)]}}</p>
+      <p>{{count[currencySymbols.indexOf(symbol)]}}</p>
     </mat-list-item>
   </mat-list>
 </div>
