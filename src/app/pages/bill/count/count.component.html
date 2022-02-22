@@ -3,9 +3,9 @@
     <p>Count</p>
   </div>
   <mat-list role="list">
-    <mat-list-item role="listitem" *ngFor="let symbol of currencySymbols">
-      <p class="currency">{{symbol}}</p>
-      <p>{{count[currencySymbols.indexOf(symbol)]}}</p>
+    <mat-list-item role="listitem" *ngFor="let val of count">
+      <p class="currency">{{getCurrencySymbol(val.currency)}}</p>
+      <p>{{val.rate}}</p>
     </mat-list-item>
   </mat-list>
 </div>

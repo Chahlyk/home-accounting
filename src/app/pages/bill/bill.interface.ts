@@ -14,4 +14,6 @@ export interface ICurrency {
 export interface IRates {
   currency: string;
   rate: number;
+  date?: string;
 }
+

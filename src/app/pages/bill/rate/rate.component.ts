@@ -1,4 +1,5 @@
 import  {Component, Input} from '@angular/core';
+import {IRates} from '../bill.interface';
 
 @Component({
   selector: 'app-rate',
@@ -7,7 +8,7 @@ import  {Component, Input} from '@angular/core';
 })
 export class RateComponent {
 
-  @Input() public dataSource: object[] = [];
+  @Input() public dataSource: IRates[] = [];
 
   public displayedColumns: string[] = ['currency', 'rate', 'date'];
 

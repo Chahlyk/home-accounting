@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BillService} from './bill.service';
 import {Subscription} from 'rxjs';
-import {IBill, ICurrency} from './bill.interface';
+import {IBill, ICurrency, IRates} from './bill.interface';
 
 @Component({
   selector: 'app-bill',
@@ -10,8 +10,8 @@ import {IBill, ICurrency} from './bill.interface';
 })
 export class BillComponent implements OnInit, OnDestroy {
 
-  public count: number[] = [];
-  public dataSource: object[] = [];
+  public count: IRates[] = [];
+  public dataSource: IRates[] = [];
   public show: boolean = false;
   private value!: number;
   private sub: Subscription = new Subscription();
@@ -20,31 +20,41 @@ export class BillComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getBill();
+    this.getDataCurrencyAndBill();
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  public getBill(): void {
+
+  public getDataCurrencyAndBill(): void {
+    this.show = false;
     this.sub.add(
       this.billService.getBill()
         .subscribe((data: IBill) => {
-          this.value = data.value;
+            this.value = data.value;
+            this.getCurrency();
         })
     );
+  }
+
+  private getCurrency(): void {
+    this.dataSource.length = 0;
+    this.count.length = 0;
     this.sub.add(
       this.billService.getCurrency()
         .subscribe((data: ICurrency) => {
           for (const val of data.rates) {
             this.dataSource.push({currency: val.currency, rate: val.rate, date: data.date});
           }
-          this.count = (data.rates.map(item => item.rate * this.value)).slice(0, 3);
+          for (const val of data.rates.slice(0, 3)) {
+            this.count.push({currency: val.currency, rate: val.rate * this.value});
+          }
           this.show = true;
         })
     );
-
   }
 
 }
+

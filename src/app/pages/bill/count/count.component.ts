@@ -1,4 +1,6 @@
 import {Component, Input} from '@angular/core';
+import {getCurrencySymbol} from '@angular/common';
+import {IRates} from '../bill.interface';
 
 @Component({
   selector: 'app-count',
@@ -7,9 +9,11 @@ import {Component, Input} from '@angular/core';
 })
 export class CountComponent {
 
-  @Input() public count!: number[];
+  @Input() public count!: IRates[];
 
-  public currencySymbols: string[] = ['€', '₴', '$'];
+  public getCurrencySymbol(value: string): string {
+    return getCurrencySymbol(value, 'narrow');
+  }
 
 }
 
