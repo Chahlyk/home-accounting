@@ -40,12 +40,12 @@ export class BillComponent implements OnInit, OnDestroy {
   }
 
   private getCurrency(): void {
-    this.dataSource.length = 0;
-    this.count.length = 0;
+    this.dataSource = [];
+    this.count = [];
     this.sub.add(
       this.billService.getCurrency()
         .subscribe((data: ICurrency) => {
-          for (const val of data.rates) {
+          for (const val of data.rates.slice(0, 3)) {
             this.dataSource.push({currency: val.currency, rate: val.rate, date: data.date});
           }
           for (const val of data.rates.slice(0, 3)) {
