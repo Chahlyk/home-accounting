@@ -3,8 +3,11 @@
     <p>History page</p>
   </div>
   <mat-divider></mat-divider>
-  <div class="content">
+  <div class="content" *ngIf="show">
     <app-chart></app-chart>
-    <app-table></app-table>
+    <app-table [dataSource]="dataSource"></app-table>
+  </div>
+  <div class="loading" *ngIf="!show">
+    <p>loading...</p>
   </div>
 </div>

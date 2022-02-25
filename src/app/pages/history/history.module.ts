@@ -5,6 +5,8 @@ import {HistoryRoutingModule} from './history-routing.module';
 import { ChartComponent } from './chart/chart.component';
 import { TableComponent } from './table/table.component';
 import {MaterialModule} from '../../shared/material.module';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import {MaterialModule} from '../../shared/material.module';
   imports: [
     CommonModule,
     HistoryRoutingModule,
-    MaterialModule
+    MaterialModule,
+    MatSortModule,
+    MatPaginatorModule
   ]
 })
 export class HistoryModule { }

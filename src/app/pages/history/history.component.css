@@ -13,3 +13,9 @@
   margin: 5px;
   line-height: normal;
 }
+
+.loading {
+  text-align: center;
+  margin: 30px;
+  color: gray;
+}

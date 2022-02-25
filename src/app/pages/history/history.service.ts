@@ -10,12 +10,12 @@ export class HistoryService {
 
   constructor(private http: HttpClient) { }
 
-  public getEvents(): Observable<IEvents> {
-    return this.http.get<IEvents>('events');
+  public getEvents(): Observable<IEvents[]> {
+    return this.http.get<IEvents[]>('events');
   }
 
-  public getCategories(): Observable<ICategories> {
-    return this.http.get<ICategories>('categories');
+  public getCategories(): Observable<ICategories[]> {
+    return this.http.get<ICategories[]>('categories');
   }
 
 }

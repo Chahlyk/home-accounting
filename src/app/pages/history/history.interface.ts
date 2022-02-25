@@ -1,10 +1,10 @@
 export interface  IEvents {
-  id: number;
+  id?: number;
   type: string;
   amount: number;
-  category: number;
+  category: number | string;
   date: string;
-  description: string;
+  description?: string;
 }
 
 export interface ICategories {
