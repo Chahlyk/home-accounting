@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HistoryService} from './history.service';
 import {Subscription} from 'rxjs';
 import {ICategories, IEvents} from './history.interface';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-history',
@@ -10,12 +11,15 @@ import {ICategories, IEvents} from './history.interface';
 })
 export class HistoryComponent implements OnInit, OnDestroy {
 
-  public dataSource: IEvents[] = [];
+  public dataTable: IEvents[] = [];
+  public dataSource!: MatTableDataSource<IEvents>;
   public show: boolean = false;
   private categories: ICategories[] = [];
   private sub: Subscription = new Subscription();
 
-  constructor(private historyService: HistoryService) { }
+  constructor(private historyService: HistoryService) {
+    this.dataSource = new MatTableDataSource(this.dataTable);
+  }
 
   public ngOnInit(): void {
     this.getDataCategoryAndEvents();
@@ -40,7 +44,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
       this.historyService.getEvents()
         .subscribe((data: IEvents[]) => {
           for (const val of data) {
-            this.dataSource.push({
+            this.dataTable.push({
               id: val.id,
               type: val.type,
               date: val.date,

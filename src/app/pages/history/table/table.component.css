@@ -1,12 +1,14 @@
-td {
-  width: 50px;
-}
-
-th {
-  width: 50px;
-}
-
 table {
+  width: 100%;
+}
+
+td,
+th{
+  width: 50px;
+}
+
+.mat-form-field {
+  font-size: 14px;
   width: 100%;
 }
 
