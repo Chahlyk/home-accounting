@@ -3,6 +3,7 @@ import {IEvents} from '../history.interface';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {HistoryService} from '../history.service';
 
 @Component({
   selector: 'app-table',
@@ -18,6 +19,8 @@ export class TableComponent {
 
   public displayedColumns: string[] = ['#', 'sum', 'date', 'category', 'type', 'action'];
 
+  constructor(private historyService: HistoryService) {
+  }
 
   public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -31,6 +34,10 @@ export class TableComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  public sendEvent(event: IEvents): void {
+    this.historyService.sendEvent(event);
   }
 
 }

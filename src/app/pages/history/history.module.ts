@@ -7,16 +7,18 @@ import { TableComponent } from './table/table.component';
 import {MaterialModule} from '../../shared/material.module';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { DetailEventComponent } from './table/detail-event/detail-event.component';
 
 
 @NgModule({
   declarations: [
     HistoryComponent,
     ChartComponent,
-    TableComponent
+    TableComponent,
+    DetailEventComponent
   ],
   exports: [
-    HistoryComponent
+    HistoryComponent,
   ],
   imports: [
     CommonModule,
