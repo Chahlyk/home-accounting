@@ -4,7 +4,7 @@
   </div>
   <mat-divider></mat-divider>
   <div class="content" *ngIf="show">
-    <app-chart></app-chart>
+    <app-chart [dataChart]="dataChart" class="chart"></app-chart>
     <app-table [dataSource]="dataSource"></app-table>
   </div>
   <div class="loading" *ngIf="!show">

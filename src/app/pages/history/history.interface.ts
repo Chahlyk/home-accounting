@@ -12,3 +12,8 @@ export interface ICategories {
   name: string;
   id: number;
 }
+
+export interface IChart {
+  name: string | number;
+  y: number;
+}

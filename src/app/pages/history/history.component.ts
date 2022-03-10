@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HistoryService} from './history.service';
 import {Subscription} from 'rxjs';
-import {ICategories, IEvents} from './history.interface';
+import {ICategories, IChart, IEvents} from './history.interface';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
@@ -13,6 +13,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
   public dataTable: IEvents[] = [];
   public dataSource!: MatTableDataSource<IEvents>;
+  public dataChart: IChart[] = [];
   public show: boolean = false;
   private categories: ICategories[] = [];
   private sub: Subscription = new Subscription();
@@ -27,6 +28,19 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  private getDataChart(): void {
+    const data: IChart[] = [];
+    for (const val of this.dataTable) {
+      data.push({name: val.category, y: val.amount});
+    }
+    this.dataChart.push(data[0]);
+    for (const val of data.slice(1)) {
+      if (this.dataChart.find(item => item.name === val.name ? item.y += val.y : this.dataChart.push(val))) {
+
+      }
+    }
   }
 
   private getDataCategoryAndEvents(): void {
@@ -54,6 +68,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
             });
           }
           this.show = true;
+          this.getDataChart();
         })
     );
   }

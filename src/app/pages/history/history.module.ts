@@ -4,10 +4,10 @@ import {HistoryComponent} from './history.component';
 import {HistoryRoutingModule} from './history-routing.module';
 import { ChartComponent } from './chart/chart.component';
 import { TableComponent } from './table/table.component';
-import {MaterialModule} from '../../shared/material.module';
-import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import { DetailEventComponent } from './table/detail-event/detail-event.component';
+import {HighchartsChartModule} from 'highcharts-angular';
+import {SharedModule} from '../../shared/shared.module';
+import {MaterialModule} from '../../shared/material.module';
 
 
 @NgModule({
@@ -24,8 +24,7 @@ import { DetailEventComponent } from './table/detail-event/detail-event.componen
     CommonModule,
     HistoryRoutingModule,
     MaterialModule,
-    MatSortModule,
-    MatPaginatorModule
+    HighchartsChartModule
   ]
 })
 export class HistoryModule { }
