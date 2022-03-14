@@ -28,6 +28,22 @@
   border-radius: 3px;
 }
 
+.redShadow {
+  box-shadow: 5px 5px 2px 5px #fbbfbb;
+}
+
+.blueShadow {
+  box-shadow: 5px 5px 2px 5px #c7cdeb;
+}
+
+.redText{
+  color: #f44336;
+}
+
+.blueText {
+  color: #3f51b5;
+}
+
 .type {
   font-size: 18px;
   text-align: center;

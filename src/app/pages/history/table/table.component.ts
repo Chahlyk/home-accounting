@@ -1,9 +1,9 @@
-import {Component, Input, ViewChild} from '@angular/core';
-import {IEvents} from '../history.interface';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {HistoryService} from '../history.service';
+import { Component, Input, ViewChild } from '@angular/core';
+import { IEvents } from '../history.interface';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { HistoryService } from '../history.service';
 
 @Component({
   selector: 'app-table',
@@ -17,14 +17,14 @@ export class TableComponent {
   @ViewChild(MatPaginator) public paginator!: MatPaginator;
   @ViewChild(MatSort) public sort!: MatSort;
 
-  public displayedColumns: string[] = ['#', 'sum', 'date', 'category', 'type', 'action'];
+  public displayedColumns: string[] = ['id', 'amount', 'date', 'category', 'type', 'action'];
 
   constructor(private historyService: HistoryService) {
   }
 
   public ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   public applyFilter(event: Event): void {
@@ -34,10 +34,6 @@ export class TableComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  public sendEvent(event: IEvents): void {
-    this.historyService.sendEvent(event);
   }
 
 }
