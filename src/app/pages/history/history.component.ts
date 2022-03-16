@@ -45,9 +45,10 @@ export class HistoryComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.historyService.getEvents()
         .subscribe((data: IEvents[]) => {
-          data.forEach(val => this.dataTable.push({...val, category: this.getCategory(val)}));
+          data.forEach((val: IEvents) => this.dataTable.push({...val, category: this.getCategory(val)}));
           this.show = true;
           this.getDataChart();
+          this.historyService.sendEvent(this.dataTable);
         })
     );
   }
@@ -62,7 +63,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private getDataChart(): void {
-    this.dataTable.forEach(item => this.preDataChart.push({name: item.category, y: item.amount}));
+    this.dataTable.forEach((item: IEvents) => this.preDataChart.push({name: item.category, y: item.amount}));
     if (this.dataChart.length !== 0) {
       this.dataChartFilter();
     } else {
@@ -73,10 +74,9 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private dataChartFilter(): void {
-      this.dataChart.map(item => {
-        this.preDataChart.map(val => {
+      this.dataChart.map((item: IChart) => {
+        this.preDataChart.map((val: IChart) => {
           item.name === val.name ? item.y += val.y : this.dataChart.push(val);
-
         });
       });
   }

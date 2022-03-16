@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ICategories, IEvents } from '../history.interface';
+import { IEvents } from '../history.interface';
 import { HistoryService } from '../history.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -11,9 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailEventComponent implements OnInit, OnDestroy {
 
-  public shadowInfo!: string;
-  public colourType!: string;
-  public show: boolean = false;
   public event!: IEvents;
   private sub: Subscription = new Subscription();
 
@@ -31,32 +28,13 @@ export class DetailEventComponent implements OnInit, OnDestroy {
   }
 
   private getEvent(): void {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    const id = +this.route.snapshot.paramMap.get('id')!;
     this.sub.add(
-      this.historyService.getEventById(id)
+      this.historyService.getEvent()
         .subscribe((data: IEvents[]) => {
-          data.forEach(item => this.event = {...item, category: this.getCategory(item)});
-          this.shadowInfo = this.event.type === 'income' ? 'blueShadow' : 'redShadow';
-          this.colourType = this.event.type === 'income' ? 'blueText' : 'redText';
-          this.show = true;
+          this.event = data[id - 1];
         })
     );
-  }
-
-  private getCategory(event: IEvents): string {
-    let category: ICategories | undefined;
-    let name!: string;
-    this.historyService.getCategories()
-      .subscribe((data: ICategories[]) => {
-        category = data.find(item => item.id === event.category);
-        if (category !== undefined) {
-          name = category.name;
-        } else {
-          name = 'not found';
-        }
-      });
-    return name;
-
   }
 
 }

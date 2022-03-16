@@ -1,4 +1,4 @@
-<div class="container" *ngIf="show">
+<div class="container">
   <div class="title">
     <button mat-icon-button [routerLink]="['/pages/history']">
       <mat-icon>keyboard_backspace</mat-icon>
@@ -7,8 +7,8 @@
   </div>
   <mat-divider></mat-divider>
   <div class="center">
-    <div [class]="shadowInfo" class="info">
-      <p [class]="colourType" class="type">{{event.type | titlecase}}</p>
+    <div [ngClass]="event.type === 'income' ? 'blue-shadow' : 'red-shadow'" class="info">
+      <p [ngClass]="event.type === 'income' ? 'blue-text' : 'red-text'" class="type">{{event.type | titlecase}}</p>
       <ul>
         <li>Sum: <b>{{event.amount}} EUR</b></li>
         <li>Category: <b>{{event.category}}</b></li>

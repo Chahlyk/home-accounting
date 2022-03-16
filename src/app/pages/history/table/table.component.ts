@@ -19,7 +19,7 @@ export class TableComponent {
 
   public displayedColumns: string[] = ['id', 'amount', 'date', 'category', 'type', 'action'];
 
-  constructor(private historyService: HistoryService) {
+  constructor() {
   }
 
   public ngAfterViewInit(): void {

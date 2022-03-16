@@ -28,19 +28,19 @@
   border-radius: 3px;
 }
 
-.redShadow {
+.red-shadow {
   box-shadow: 5px 5px 2px 5px #fbbfbb;
 }
 
-.blueShadow {
+.blue-shadow {
   box-shadow: 5px 5px 2px 5px #c7cdeb;
 }
 
-.redText{
+.red-text{
   color: #f44336;
 }
 
-.blueText {
+.blue-text {
   color: #3f51b5;
 }
 
