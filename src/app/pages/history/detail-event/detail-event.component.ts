@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailEventComponent implements OnInit, OnDestroy {
 
-  public class!: boolean;
+  public isIncome!: boolean;
   public event!: IEvents;
   private sub: Subscription = new Subscription();
 
@@ -34,7 +34,7 @@ export class DetailEventComponent implements OnInit, OnDestroy {
       this.historyService.getEvent()
         .subscribe((data: IEvents[]) => {
           this.event = data[id - 1];
-          this.class = this.event.type === 'income';
+          this.isIncome = this.event.type === 'income';
         })
     );
   }

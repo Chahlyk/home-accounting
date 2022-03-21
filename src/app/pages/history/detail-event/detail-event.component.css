@@ -19,17 +19,11 @@
   margin-top: 30px;
 }
 
-.info-income {
-  width: 300px;
-  padding: 10px;
-  display: flex;
-  flex-flow: column;
-  background: white;
-  border-radius: 3px;
+.info.income {
   box-shadow: 5px 5px 2px 5px #c7cdeb;
 }
 
-.info-outcome {
+.info {
   width: 300px;
   padding: 10px;
   display: flex;
@@ -39,14 +33,11 @@
   box-shadow: 5px 5px 2px 5px #fbbfbb;
 }
 
-.type-income {
-  font-size: 18px;
-  text-align: center;
-  margin: 0;
+.type.income {
   color: #3f51b5;
 }
 
-.type-outcome {
+.type {
   font-size: 18px;
   text-align: center;
   margin: 0;
