@@ -11,8 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailEventComponent implements OnInit, OnDestroy {
 
-  public color!: string;
-  public shadow!: string;
   public class!: boolean;
   public event!: IEvents;
   private sub: Subscription = new Subscription();
@@ -37,19 +35,8 @@ export class DetailEventComponent implements OnInit, OnDestroy {
         .subscribe((data: IEvents[]) => {
           this.event = data[id - 1];
           this.class = this.event.type === 'income';
-          this.changeClass();
         })
     );
-  }
-
-  private changeClass(): void {
-      if (this.class) {
-        this.color = 'color: #3f51b5;';
-        this.shadow = 'box-shadow: 5px 5px 2px 5px #c7cdeb;';
-      } else {
-        this.color = 'color: #f44336;';
-        this.shadow = 'box-shadow: 5px 5px 2px 5px #fbbfbb;';
-      }
   }
 
 }

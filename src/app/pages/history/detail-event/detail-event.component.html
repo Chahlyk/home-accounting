@@ -7,8 +7,8 @@
   </div>
   <mat-divider></mat-divider>
   <div class="center">
-    <div class="info" [style]="shadow">
-      <p class="type" [style]="color">{{event.type | titlecase}}</p>
+    <div class="info" [ngClass]="{'info-income': class, 'info-outcome': !class}">
+      <p [ngClass]="{'type-income': class, 'type-outcome': !class}">{{event.type | titlecase}}</p>
       <ul>
         <li>Sum: <b>{{event.amount}} EUR</b></li>
         <li>Category: <b>{{event.category}}</b></li>
