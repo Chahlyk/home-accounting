@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {ICategories, IEvents} from './history.interface';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ICategories, IEvents } from './history.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class HistoryService {
     return this.http.get<ICategories[]>('categories');
   }
 
-  public sendEvent(event: IEvents): void {
-    this.subject.next({ data: event});
+  public sendEvent(event: IEvents[]): void {
+    this.subject.next(event);
   }
 
   public getEvent(): Observable<any> {
