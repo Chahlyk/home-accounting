@@ -61,9 +61,9 @@
       "id": 1
     },
     {
+      "id": 2,
       "name": "Food",
-      "capacity": 10000,
-      "id": 2
+      "capacity": 1300
     },
     {
       "id": 3,
@@ -111,6 +111,14 @@
       "date": "10.06.2019 14:01:58",
       "id": 5,
       "description": "Refueling + maintenance pass"
+    },
+    {
+      "category": 2,
+      "type": "outcome",
+      "amount": "2344",
+      "description": "shthst",
+      "date": "29.03.2022, 17:16:24",
+      "id": 6
     }
   ]
 }

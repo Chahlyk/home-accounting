@@ -1,0 +1,19 @@
+<p>Add category</p>
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Enter name</mat-label>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="form.get('name')?.errors?.['required']">Field is required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter capacity</mat-label>
+    <input matInput formControlName="capacity">
+    <mat-error *ngIf="form.get('capacity')?.errors?.['required']">Field is required</mat-error>
+    <mat-error *ngIf="form.get('capacity')?.errors?.['pattern']">Field is invalid</mat-error>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-raised-button (click)="addCategories()" [disabled]="form.invalid">Add</button>
+    <button mat-raised-button color="primary" (click)="show()">Close</button>
+  </div>
+</form>
+

@@ -4,13 +4,13 @@
     <p>{{errorText}}</p>
   </div>
   <form [formGroup]="form" *ngIf="!errorText">
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput placeholder="pat@example.com"  formControlName="email">
       <mat-error *ngIf="form.get('email')?.errors?.['required']">Field is required</mat-error>
       <mat-error *ngIf="form.get('email')?.errors?.['email']">Email is invalid</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Password</mat-label>
       <input matInput #input [type]="hide ? 'password' : 'text'" formControlName="password">
       <mat-error *ngIf="form.get('password')?.errors?.['required']">Field is required</mat-error>

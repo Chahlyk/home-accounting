@@ -63,7 +63,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private getDataChart(): void {
-    this.dataTable.forEach((item: IEvents) => this.preDataChart.push({name: item.category, y: item.amount}));
+    this.dataTable.forEach((item: IEvents) => this.preDataChart.push({name: item.category, y: +item.amount}));
     if (this.dataChart.length !== 0) {
       this.dataChartFilter();
     } else {

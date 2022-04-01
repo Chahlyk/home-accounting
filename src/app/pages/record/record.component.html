@@ -1,1 +1,33 @@
-<p>record works!</p>
+<div class="container">
+  <div class="title">
+    <p>Record page</p>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="add-buttons">
+    <button mat-raised-button color="primary" (click)="addEvent = !addEvent">Add event</button>
+    <button mat-raised-button color="primary" (click)="addCategory = !addCategory">Add category</button>
+  </div>
+  <div *ngIf="show">
+    <app-category-table [dataSource]="dataSource"></app-category-table>
+  </div>
+  <div class="loading" *ngIf="!show">
+    <p>loading...</p>
+  </div>
+</div>
+<div class="add" *ngIf="addCategory">
+  <div class="shade"></div>
+  <div class="modal">
+    <div class="content">
+      <app-add-category (clickChange)="onClick($event)" [addCategory]="addCategory"></app-add-category>
+    </div>
+  </div>
+</div>
+<div class="add" *ngIf="addEvent">
+  <div class="shade"></div>
+  <div class="modal">
+    <div class="content">
+      <app-add-event (clickChange)="onClick($event)" [addEvent]="addEvent" [categories]="dataSource"></app-add-event>
+    </div>
+  </div>
+</div>
+

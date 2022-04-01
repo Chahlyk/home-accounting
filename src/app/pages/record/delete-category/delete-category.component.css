@@ -1,0 +1,12 @@
+.content {
+  background: ghostwhite;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+button {
+  margin-left: 10px;
+}

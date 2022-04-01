@@ -10,7 +10,7 @@ export interface  IEvents {
 export interface ICategories {
   capacity: number;
   name: string;
-  id: number;
+  id?: number;
 }
 
 export interface IChart {
