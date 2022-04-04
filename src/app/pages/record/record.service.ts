@@ -22,12 +22,12 @@ export class RecordService {
     return this.http.post<IEvents>('events', event);
   }
 
-  public deleteCategory(id: number): Observable<unknown> {
-    return this.http.delete(`categories/${id}`);
+  public deleteCategory(id: number): Observable<ICategories> {
+    return this.http.delete<ICategories>(`categories/${id}`);
   }
 
-  public editCategory(id: number | undefined, category: ICategories): Observable<unknown> {
-    return this.http.put(`categories/${id}`, category);
+  public editCategory(id: number, category: ICategories): Observable<ICategories> {
+    return this.http.put<ICategories>(`categories/${id}`, category);
   }
 
 }
