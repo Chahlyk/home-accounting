@@ -11,6 +11,6 @@ export class CategoryTableComponent {
 
   @Input() public dataSource: ICategories[] = [];
 
-  public displayedColumns: string[] = ['idx', 'name', 'capacity', 'action'];
+  public displayedColumns: string[] = ['index', 'name', 'capacity', 'action'];
 
 }
