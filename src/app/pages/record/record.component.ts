@@ -10,9 +10,10 @@ import { ICategories } from '../history/history.interface';
 })
 export class RecordComponent implements OnInit, OnDestroy {
 
-  public sub: Subscription = new Subscription();
   public dataSource: ICategories[] = [];
   public show: boolean = false;
+
+  private sub: Subscription = new Subscription();
 
   constructor(private recordService: RecordService) { }
 
