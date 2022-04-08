@@ -1,1 +1,16 @@
-<p>record works!</p>
+<div class="container">
+  <div mat-dialog-title>
+    <p>Record page</p>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="add-buttons">
+    <button mat-raised-button color="primary" (click)="openDialog()">Add event</button>
+    <button mat-raised-button color="primary">Add category</button>
+  </div>
+  <div *ngIf="show">
+    <app-category-table [dataSource]="dataSource"></app-category-table>
+  </div>
+  <div class="loading" *ngIf="!show">
+    <p>loading...</p>
+  </div>
+</div>

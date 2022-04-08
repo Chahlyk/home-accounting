@@ -1,0 +1,30 @@
+<p>Add event</p>
+<form>
+  <mat-form-field>
+    <mat-label>Choose category</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let category of data" [value]="category.id">{{category.name}}</mat-option>
+    </mat-select>
+    <mat-error>Field is required</mat-error>
+  </mat-form-field>
+  <p>Choose type</p>
+  <mat-radio-group>
+    <mat-radio-button value="income">Income</mat-radio-button>
+    <mat-radio-button value="outcome">Outcome</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field>
+    <mat-label>Enter sum</mat-label>
+    <input matInput>
+    <mat-error>Field is required</mat-error>
+    <mat-error>Field is invalid</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter description</mat-label>
+    <input matInput>
+    <mat-error>Field is required</mat-error>
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-raised-button>Add</button>
+    <button mat-raised-button mat-dialog-close color="primary">Close</button>
+  </div>
+</form>

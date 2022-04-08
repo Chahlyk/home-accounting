@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HistoryService} from './history.service';
-import {Subscription} from 'rxjs';
-import {ICategories, IChart, IEvents} from './history.interface';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HistoryService } from './history.service';
+import { Subscription } from 'rxjs';
+import { ICategories, IChart, IEvents } from './history.interface';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-history',
@@ -16,31 +16,19 @@ export class HistoryComponent implements OnInit, OnDestroy {
   public dataChart: IChart[] = [];
   public show: boolean = false;
   private categories: ICategories[] = [];
+  private preDataChart: IChart[] = [];
   private sub: Subscription = new Subscription();
 
   constructor(private historyService: HistoryService) {
-    this.dataSource = new MatTableDataSource(this.dataTable);
   }
 
   public ngOnInit(): void {
     this.getDataCategoryAndEvents();
+    this.dataSource = new MatTableDataSource(this.dataTable);
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
-  }
-
-  private getDataChart(): void {
-    const data: IChart[] = [];
-    for (const val of this.dataTable) {
-      data.push({name: val.category, y: val.amount});
-    }
-    this.dataChart.push(data[0]);
-    for (const val of data.slice(1)) {
-      if (this.dataChart.find(item => item.name === val.name ? item.y += val.y : this.dataChart.push(val))) {
-
-      }
-    }
   }
 
   private getDataCategoryAndEvents(): void {
@@ -57,18 +45,10 @@ export class HistoryComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.historyService.getEvents()
         .subscribe((data: IEvents[]) => {
-          for (const val of data) {
-            this.dataTable.push({
-              id: val.id,
-              type: val.type,
-              date: val.date,
-              category: this.getCategory(val),
-              amount: val.amount,
-              description: val.description
-            });
-          }
+          data.forEach((val: IEvents) => this.dataTable.push({...val, category: this.getCategory(val)}));
           this.show = true;
           this.getDataChart();
+          this.historyService.sendEvent(this.dataTable);
         })
     );
   }
@@ -80,6 +60,25 @@ export class HistoryComponent implements OnInit, OnDestroy {
     } else {
       return 'not found';
     }
+  }
+
+  private getDataChart(): void {
+    this.dataTable.forEach((item: IEvents) => this.preDataChart.push({name: item.category, y: +item.amount}));
+    if (this.dataChart.length !== 0) {
+      this.dataChartFilter();
+    } else {
+      this.dataChart.push(this.preDataChart[0]);
+      this.preDataChart.shift();
+      this.dataChartFilter();
+    }
+  }
+
+  private dataChartFilter(): void {
+    this.dataChart.map((item: IChart) => {
+      this.preDataChart.map((val: IChart) => {
+        item.name === val.name ? item.y += val.y : this.dataChart.push(val);
+      });
+    });
   }
 
 }

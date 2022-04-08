@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import {IChart} from '../history.interface';
+import { IChart } from '../history.interface';
 
 
 @Component({
@@ -24,8 +24,11 @@ export class ChartComponent implements OnInit {
   private addOptions(): void {
     this.options = {
       chart: {
+        marginTop: 0,
+        marginBottom: 0,
+        marginLeft: 0,
+        marginRight: 0,
         plotBackgroundColor: 'ghostwhite',
-        plotBorderWidth: null,
         plotShadow: false,
         type: 'pie'
       },
@@ -48,7 +51,8 @@ export class ChartComponent implements OnInit {
           allowPointSelect: false,
           dataLabels: {
             enabled: true,
-            format: '{point.name}: {point.percentage:.1f} %'
+            format: '{point.name}: {point.percentage:.1f} %',
+            distance: -70
           }
         }
       },

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {RecordComponent} from './record.component';
+import { RouterModule, Routes } from '@angular/router';
+import { RecordComponent } from './record.component';
 
 
 const routes: Routes = [
@@ -11,4 +11,6 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RecordRoutingModule { }
+export class RecordRoutingModule {
+
+}

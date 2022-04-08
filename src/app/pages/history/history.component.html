@@ -3,7 +3,7 @@
     <p>History page</p>
   </div>
   <mat-divider></mat-divider>
-  <div class="content" *ngIf="show">
+  <div *ngIf="show">
     <app-chart [dataChart]="dataChart" class="chart"></app-chart>
     <app-table [dataSource]="dataSource"></app-table>
   </div>
