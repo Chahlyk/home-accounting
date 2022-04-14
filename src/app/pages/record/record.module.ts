@@ -5,6 +5,7 @@ import { RecordRoutingModule } from './record-routing.module';
 import { CategoryTableComponent } from './category-table/category-table.component';
 import { MaterialModule } from '../../shared/material.module';
 import { AddEventComponent } from './add-event/add-event.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AddEventComponent } from './add-event/add-event.component';
     CommonModule,
     RecordRoutingModule,
     MaterialModule,
+    ReactiveFormsModule,
   ]
 })
 export class RecordModule { }

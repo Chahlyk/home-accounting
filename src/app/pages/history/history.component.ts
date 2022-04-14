@@ -3,6 +3,8 @@ import { HistoryService } from './history.service';
 import { Subscription } from 'rxjs';
 import { ICategories, IChart, IEvents } from './history.interface';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddEventComponent } from '../record/add-event/add-event.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-history',
@@ -19,16 +21,33 @@ export class HistoryComponent implements OnInit, OnDestroy {
   private preDataChart: IChart[] = [];
   private sub: Subscription = new Subscription();
 
-  constructor(private historyService: HistoryService) {
-  }
+  constructor(
+    private historyService: HistoryService,
+    public dialog: MatDialog) { }
 
   public ngOnInit(): void {
     this.getDataCategoryAndEvents();
-    this.dataSource = new MatTableDataSource(this.dataTable);
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(AddEventComponent, {
+      data: this.categories
+    });
+    this.sub.add(
+      dialogRef.afterClosed()
+        .subscribe(() => {
+          this.show = false;
+          this.dataTable = [];
+          this.dataChart = [];
+          this.preDataChart = [];
+          this.categories = [];
+          this.getDataCategoryAndEvents();
+        })
+    );
   }
 
   private getDataCategoryAndEvents(): void {
@@ -46,7 +65,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
       this.historyService.getEvents()
         .subscribe((data: IEvents[]) => {
           data.forEach((val: IEvents) => this.dataTable.push({...val, category: this.getCategory(val)}));
-          this.show = true;
+          this.dataSource = new MatTableDataSource(this.dataTable);
           this.getDataChart();
           this.historyService.sendEvent(this.dataTable);
         })
@@ -77,6 +96,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     this.dataChart.map((item: IChart) => {
       this.preDataChart.map((val: IChart) => {
         item.name === val.name ? item.y += val.y : this.dataChart.push(val);
+        this.show = true;
       });
     });
   }
