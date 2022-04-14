@@ -6,7 +6,7 @@ import { TableComponent } from './table/table.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { MaterialModule } from '../../shared/material.module';
 import { ChartComponent } from './chart/chart.component';
-import { DetailEventComponent } from './table/detail-event/detail-event.component';
+import { DetailEventComponent } from './detail-event/detail-event.component';
 
 
 @NgModule({

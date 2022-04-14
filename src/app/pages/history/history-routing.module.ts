@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HistoryComponent } from './history.component';
-import { DetailEventComponent } from './table/detail-event/detail-event.component';
+import { DetailEventComponent } from './detail-event/detail-event.component';
 
 
 const routes: Routes = [
