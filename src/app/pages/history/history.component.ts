@@ -22,8 +22,9 @@ export class HistoryComponent implements OnInit, OnDestroy {
   private sub: Subscription = new Subscription();
 
   constructor(
+    public dialog: MatDialog,
     private historyService: HistoryService,
-    public dialog: MatDialog) { }
+    ) { }
 
   public ngOnInit(): void {
     this.getDataCategoryAndEvents();
@@ -40,12 +41,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     this.sub.add(
       dialogRef.afterClosed()
         .subscribe(() => {
-          this.show = false;
-          this.dataTable = [];
-          this.dataChart = [];
-          this.preDataChart = [];
-          this.categories = [];
-          this.getDataCategoryAndEvents();
+          window.location.reload();
         })
     );
   }
