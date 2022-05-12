@@ -41,7 +41,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     this.sub.add(
       dialogRef.afterClosed()
         .subscribe(() => {
-          window.location.reload();
+          this.getDataCategoryAndEvents();
         })
     );
   }
@@ -57,10 +57,15 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private getEvents(): void {
+    this.dataTable = [];
+    this.dataSource = new MatTableDataSource(this.dataTable);
     this.sub.add(
       this.historyService.getEvents()
         .subscribe((data: IEvents[]) => {
-          data.forEach((val: IEvents) => this.dataTable.push({...val, category: this.getCategory(val)}));
+          data.forEach((val: IEvents) => {
+            this.dataTable.push({...val, category: this.getCategory(val)});
+            }
+          );
           this.dataSource = new MatTableDataSource(this.dataTable);
           this.getDataChart();
           this.historyService.sendEvent(this.dataTable);
@@ -78,6 +83,8 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private getDataChart(): void {
+    this.preDataChart = [];
+    this.dataChart = [];
     this.dataTable.forEach((item: IEvents) => this.preDataChart.push({name: item.category, y: +item.amount}));
     if (this.dataChart.length !== 0) {
       this.dataChartFilter();

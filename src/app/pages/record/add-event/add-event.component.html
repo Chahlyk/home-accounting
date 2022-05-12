@@ -16,7 +16,7 @@
     <mat-label>Enter sum</mat-label>
     <input matInput formControlName="amount">
     <mat-error *ngIf="form.get('amount')?.errors?.['required']">Field is required</mat-error>
-    <mat-error *ngIf="form.get('amount')?.errors?.['pattern']">this field must contain only numbers</mat-error>
+    <mat-error *ngIf="form.get('amount')?.errors?.['pattern']">This field must contain only numbers</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Enter description</mat-label>

@@ -4,6 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { RecordService } from '../record.service';
+import { RecordComponent } from '../record.component';
+import { HistoryComponent } from '../../history/history.component';
 
 @Component({
   selector: 'app-add-event',
@@ -12,14 +14,12 @@ import { RecordService } from '../record.service';
 })
 export class AddEventComponent implements OnInit, OnDestroy {
 
-
   public form!: FormGroup;
-
   private sub: Subscription = new Subscription();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ICategories[],
-    public dialogRef: MatDialogRef<any>,
+    public dialogRef: MatDialogRef<RecordComponent, HistoryComponent>,
     private recordService: RecordService) { }
 
   public ngOnInit(): void {
@@ -31,7 +31,6 @@ export class AddEventComponent implements OnInit, OnDestroy {
   }
 
   public addEvents(): void {
-    this.form.value.date = new Date().toLocaleString();
     this.sub.add(
       this.recordService.addEvent(this.form.value)
         .subscribe(() => {
@@ -46,6 +45,7 @@ export class AddEventComponent implements OnInit, OnDestroy {
       type: new FormControl('', Validators.required),
       amount: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+(?!.)/)]),
       description: new FormControl('', Validators.required),
+      date: new FormControl(new Date().toLocaleString()),
     });
   }
 

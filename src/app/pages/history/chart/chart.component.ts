@@ -21,6 +21,11 @@ export class ChartComponent implements OnInit {
     Highcharts.chart('container', this.options);
   }
 
+  public ngOnChanges(): void {
+    this.addOptions();
+    Highcharts.chart('container', this.options);
+  }
+
   private addOptions(): void {
     this.options = {
       chart: {

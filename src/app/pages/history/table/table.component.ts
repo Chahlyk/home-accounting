@@ -26,6 +26,11 @@ export class TableComponent {
     this.dataSource.paginator = this.paginator;
   }
 
+  public ngOnChanges(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
   public applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
