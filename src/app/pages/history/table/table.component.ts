@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { IEvents } from '../history.interface';
+import { IEvent } from '../history.interface';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class TableComponent {
 
-  @Input() public dataSource!: MatTableDataSource<IEvents>;
+  @Input() public dataSource!: MatTableDataSource<IEvent>;
 
   @ViewChild(MatPaginator) public paginator!: MatPaginator;
   @ViewChild(MatSort) public sort!: MatSort;
@@ -22,11 +22,6 @@ export class TableComponent {
   }
 
   public ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
-
-  public ngOnChanges(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

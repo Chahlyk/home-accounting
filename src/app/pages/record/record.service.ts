@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ICategories, IEvents } from '../history/history.interface';
+import { ICategory, IEvent } from '../history/history.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,24 +10,24 @@ export class RecordService {
 
   constructor(private http: HttpClient) { }
 
-  public getCategories(): Observable<ICategories[]> {
-    return this.http.get<ICategories[]>('categories');
+  public getCategories(): Observable<ICategory[]> {
+    return this.http.get<ICategory[]>('categories');
   }
 
-  public addCategory(category: ICategories): Observable<ICategories> {
-    return this.http.post<ICategories>('categories', category);
+  public addCategory(category: ICategory): Observable<ICategory> {
+    return this.http.post<ICategory>('categories', category);
   }
 
-  public addEvent(event: IEvents): Observable<IEvents> {
-    return this.http.post<IEvents>('events', event);
+  public addEvent(event: IEvent): Observable<IEvent> {
+    return this.http.post<IEvent>('events', event);
   }
 
-  public deleteCategory(id: number): Observable<ICategories> {
-    return this.http.delete<ICategories>(`categories/${id}`);
+  public deleteCategory(id: number): Observable<ICategory> {
+    return this.http.delete<ICategory>(`categories/${id}`);
   }
 
-  public editCategory(id: number, category: ICategories): Observable<ICategories> {
-    return this.http.put<ICategories>(`categories/${id}`, category);
+  public editCategory(id: number, category: ICategory): Observable<ICategory> {
+    return this.http.put<ICategory>(`categories/${id}`, category);
   }
 
 }

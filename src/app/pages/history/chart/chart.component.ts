@@ -14,20 +14,12 @@ export class ChartComponent implements OnInit {
 
   public highcharts = Highcharts;
 
-  public options!: any;
-
   public ngOnInit(): void {
-    this.addOptions();
-    Highcharts.chart('container', this.options);
+    Highcharts.chart('container', this.addOptions());
   }
 
-  public ngOnChanges(): void {
-    this.addOptions();
-    Highcharts.chart('container', this.options);
-  }
-
-  private addOptions(): void {
-    this.options = {
+  private addOptions(): object {
+    return {
       chart: {
         marginTop: 0,
         marginBottom: 0,

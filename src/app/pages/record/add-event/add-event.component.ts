@@ -1,11 +1,9 @@
-import { Component, Inject, NgIterable, OnDestroy, OnInit } from '@angular/core';
-import { ICategories, IEvents } from '../../history/history.interface';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ICategory } from '../../history/history.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { RecordService } from '../record.service';
-import { RecordComponent } from '../record.component';
-import { HistoryComponent } from '../../history/history.component';
 
 @Component({
   selector: 'app-add-event',
@@ -18,8 +16,8 @@ export class AddEventComponent implements OnInit, OnDestroy {
   private sub: Subscription = new Subscription();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ICategories[],
-    public dialogRef: MatDialogRef<RecordComponent, HistoryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ICategory[],
+    public dialogRef: MatDialogRef<AddEventComponent>,
     private recordService: RecordService) { }
 
   public ngOnInit(): void {
@@ -34,7 +32,7 @@ export class AddEventComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.recordService.addEvent(this.form.value)
         .subscribe(() => {
-          this.dialogRef.close();
+          this.dialogRef.close(true);
         })
     );
   }

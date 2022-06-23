@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IEvents } from '../history.interface';
+import { IEvent } from '../history.interface';
 import { HistoryService } from '../history.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailEventComponent implements OnInit, OnDestroy {
 
   public isIncome!: boolean;
-  public event!: IEvents;
+  public event!: IEvent;
   private sub: Subscription = new Subscription();
 
   constructor(
@@ -32,7 +32,7 @@ export class DetailEventComponent implements OnInit, OnDestroy {
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.sub.add(
       this.historyService.getEvent()
-        .subscribe((data: IEvents[]) => {
+        .subscribe((data: IEvent[]) => {
           this.event = data[id - 1];
           this.isIncome = this.event.type === 'income';
         })

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICategories } from '../../history/history.interface';
+import { ICategory } from '../../history/history.interface';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ICategories } from '../../history/history.interface';
 })
 export class CategoryTableComponent {
 
-  @Input() public dataSource: ICategories[] = [];
+  @Input() public dataSource: ICategory[] = [];
 
   public displayedColumns: string[] = ['index', 'name', 'capacity', 'action'];
 

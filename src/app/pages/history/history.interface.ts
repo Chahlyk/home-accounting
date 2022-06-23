@@ -1,4 +1,4 @@
-export interface  IEvents {
+export interface  IEvent {
   id?: number;
   type: string;
   amount: number;
@@ -7,7 +7,7 @@ export interface  IEvents {
   description?: string;
 }
 
-export interface ICategories {
+export interface ICategory {
   capacity: number;
   name: string;
   id?: number;
