@@ -18,9 +18,6 @@ export class TableComponent {
 
   public displayedColumns: string[] = ['id', 'amount', 'date', 'category', 'type', 'action'];
 
-  constructor() {
-  }
-
   public ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;

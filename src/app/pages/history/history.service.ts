@@ -8,24 +8,18 @@ import { ICategory, IEvent } from './history.interface';
 })
 export class HistoryService {
 
-  public subject: BehaviorSubject<object> = new BehaviorSubject<object>({});
-
   constructor(private http: HttpClient) { }
 
   public getEvents(): Observable<IEvent[]> {
     return this.http.get<IEvent[]>('events');
   }
 
+  public getEvent(id: number): Observable<IEvent[]> {
+    return this.http.get<IEvent[]>(`events?id=${id}`);
+  }
+
   public getCategories(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>('categories');
-  }
-
-  public sendEvent(event: IEvent[]): void {
-    this.subject.next(event);
-  }
-
-  public getEvent(): Observable<any> {
-    return this.subject.asObservable();
   }
 
 }

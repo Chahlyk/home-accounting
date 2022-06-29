@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IEvent } from '../history.interface';
+import { ICategory, IEvent } from '../history.interface';
 import { HistoryService } from '../history.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +13,7 @@ export class DetailEventComponent implements OnInit, OnDestroy {
 
   public isIncome!: boolean;
   public event!: IEvent;
+  public show: boolean = false;
   private sub: Subscription = new Subscription();
 
   constructor(
@@ -29,12 +30,24 @@ export class DetailEventComponent implements OnInit, OnDestroy {
   }
 
   private getEvent(): void {
-    const id = +this.route.snapshot.paramMap.get('id')!;
+    const id: number = +this.route.snapshot.paramMap.get('id')!;
     this.sub.add(
-      this.historyService.getEvent()
+      this.historyService.getEvent(id)
         .subscribe((data: IEvent[]) => {
-          this.event = data[id - 1];
+          this.event = data[0];
+          this.addCategoryName();
           this.isIncome = this.event.type === 'income';
+          this.show = true;
+        })
+    );
+  }
+
+  private addCategoryName(): void {
+    this.sub.add(
+      this.historyService.getCategories()
+        .subscribe((data: ICategory[]) => {
+          const category: ICategory | undefined = data.find(item => item.id === this.event.category);
+          category ? (this.event.category = category.name) : (this.event.category = 'not found');
         })
     );
   }

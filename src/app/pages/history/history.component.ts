@@ -18,7 +18,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
   public dataChart: IChart[] = [];
   public show: boolean = false;
   private categories: ICategory[] = [];
-  private preDataChart: IChart[] = [];
+  private outcomeEvents: IChart[] = [];
   private sub: Subscription = new Subscription();
 
   constructor(
@@ -44,8 +44,6 @@ export class HistoryComponent implements OnInit, OnDestroy {
         .subscribe((result: boolean) => {
           if (result) {
             this.getDataCategoryAndEvents();
-          } else {
-            return;
           }
         })
     );
@@ -78,33 +76,21 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
   private getCategory(event: IEvent): string {
     const category: ICategory | undefined = this.categories.find(item => item.id === event.category);
-    if (category !== undefined) {
-      return category.name;
-    } else {
-      return 'not found';
-    }
+    return category !== undefined ? category.name : 'not found';
   }
 
   private getDataChart(): void {
-    this.preDataChart = [];
-    this.dataChart = [];
-    this.dataTable.forEach((item: IEvent) => this.preDataChart.push({name: item.category, y: +item.amount}));
-    if (this.dataChart.length !== 0) {
-      this.dataChartFilter();
-    } else {
-      this.dataChart.push(this.preDataChart[0]);
-      this.preDataChart.shift();
-      this.dataChartFilter();
+    this.outcomeEvents = [];
+    for (const item of this.dataTable) {
+      if (item.type === 'outcome') {
+        this.outcomeEvents.push({name: item.category, y: +item.amount});
+      }
     }
-  }
-
-  private dataChartFilter(): void {
-    this.dataChart.map((item: IChart) => {
-      this.preDataChart.map((val: IChart) => {
-        item.name === val.name ? item.y += val.y : this.dataChart.push(val);
-        this.show = true;
-      });
-    });
+    const sumAmount = Object.fromEntries(this.outcomeEvents.map(val => [val.name, 0]));
+    this.outcomeEvents.forEach(val => { sumAmount[val.name] += val.y; } );
+    const separated  = Object.entries(sumAmount);
+    separated.map(item => this.dataChart.push({name: item[0], y: item[1]}));
+    this.show = true;
   }
 
 }
