@@ -5,6 +5,7 @@ import { ICategory, IChart, IEvent } from './history.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddEventComponent } from '../record/add-event/add-event.component';
 import { MatDialog } from '@angular/material/dialog';
+import { RecordService } from '../record/record.service';
 
 @Component({
   selector: 'app-history',
@@ -18,12 +19,13 @@ export class HistoryComponent implements OnInit, OnDestroy {
   public dataChart: IChart[] = [];
   public show: boolean = false;
   private categories: ICategory[] = [];
-  private outcomeEvents: IChart[] = [];
+  private dataEvents: IEvent[] = [];
   private sub: Subscription = new Subscription();
 
   constructor(
     public dialog: MatDialog,
     private historyService: HistoryService,
+    private recordService: RecordService,
     ) { }
 
   public ngOnInit(): void {
@@ -50,8 +52,9 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private getDataCategoryAndEvents(): void {
+    this.show = false;
     this.sub.add(
-      this.historyService.getCategories()
+      this.recordService.getCategories()
         .subscribe((data: ICategory[]) => {
           this.categories = data;
           this.getEvents();
@@ -64,6 +67,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.historyService.getEvents()
         .subscribe((data: IEvent[]) => {
+          this.dataEvents = data;
           data.forEach((val: IEvent) => {
             this.dataTable.push({...val, category: this.getCategory(val)});
             }
@@ -80,17 +84,18 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private getDataChart(): void {
-    this.outcomeEvents = [];
-    for (const item of this.dataTable) {
-      if (item.type === 'outcome') {
-        this.outcomeEvents.push({name: item.category, y: +item.amount});
-      }
-    }
-    const sumAmount = Object.fromEntries(this.outcomeEvents.map(val => [val.name, 0]));
-    this.outcomeEvents.forEach(val => { sumAmount[val.name] += val.y; } );
-    const separated  = Object.entries(sumAmount);
-    separated.map(item => this.dataChart.push({name: item[0], y: item[1]}));
-    this.show = true;
+    this.dataChart = [];
+    this.categories.forEach((cat: ICategory) => {
+      const catEvent = this.dataEvents.filter((e: IEvent) => e.category === cat.id && e.type === 'outcome');
+      this.dataChart.push({
+        name: cat.name,
+        y: catEvent.reduce((total, e) => {
+          total += +e.amount;
+          return total;
+        }, 0)
+      });
+      this.show = true;
+    });
   }
 
 }

@@ -11,7 +11,6 @@ import { IChart } from '../history.interface';
 export class ChartComponent implements OnInit {
 
   @Input() public dataChart: IChart[] = [];
-
   public highcharts = Highcharts;
 
   public ngOnInit(): void {

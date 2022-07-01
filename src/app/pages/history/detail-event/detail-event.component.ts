@@ -3,6 +3,7 @@ import { ICategory, IEvent } from '../history.interface';
 import { HistoryService } from '../history.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { RecordService } from '../../record/record.service';
 
 @Component({
   selector: 'app-detail-event',
@@ -18,6 +19,7 @@ export class DetailEventComponent implements OnInit, OnDestroy {
 
   constructor(
     private historyService: HistoryService,
+    private recordService: RecordService,
     private route: ActivatedRoute,
     ) { }
 
@@ -44,10 +46,10 @@ export class DetailEventComponent implements OnInit, OnDestroy {
 
   private addCategoryName(): void {
     this.sub.add(
-      this.historyService.getCategories()
+      this.recordService.getCategories()
         .subscribe((data: ICategory[]) => {
           const category: ICategory | undefined = data.find(item => item.id === this.event.category);
-          category ? (this.event.category = category.name) : (this.event.category = 'not found');
+          this.event.category = category ? category.name : 'not found';
         })
     );
   }
