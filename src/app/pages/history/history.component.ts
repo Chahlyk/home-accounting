@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HistoryService } from './history.service';
 import { Subscription } from 'rxjs';
-import { ICategories, IChart, IEvents } from './history.interface';
+import { ICategory, IChart, IEvent } from './history.interface';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddEventComponent } from '../record/add-event/add-event.component';
+import { MatDialog } from '@angular/material/dialog';
+import { RecordService } from '../record/record.service';
 
 @Component({
   selector: 'app-history',
@@ -11,30 +14,48 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class HistoryComponent implements OnInit, OnDestroy {
 
-  public dataTable: IEvents[] = [];
-  public dataSource!: MatTableDataSource<IEvents>;
+  public dataTable: IEvent[] = [];
+  public dataSource!: MatTableDataSource<IEvent>;
   public dataChart: IChart[] = [];
   public show: boolean = false;
-  private categories: ICategories[] = [];
-  private preDataChart: IChart[] = [];
+  private categories: ICategory[] = [];
+  private dataEvents: IEvent[] = [];
   private sub: Subscription = new Subscription();
 
-  constructor(private historyService: HistoryService) {
-  }
+  constructor(
+    public dialog: MatDialog,
+    private historyService: HistoryService,
+    private recordService: RecordService,
+    ) { }
 
   public ngOnInit(): void {
     this.getDataCategoryAndEvents();
-    this.dataSource = new MatTableDataSource(this.dataTable);
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  private getDataCategoryAndEvents(): void {
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(AddEventComponent, {
+      data: this.categories,
+      disableClose: true
+    });
     this.sub.add(
-      this.historyService.getCategories()
-        .subscribe((data: ICategories[]) => {
+      dialogRef.afterClosed()
+        .subscribe((result: boolean) => {
+          if (result) {
+            this.getDataCategoryAndEvents();
+          }
+        })
+    );
+  }
+
+  private getDataCategoryAndEvents(): void {
+    this.show = false;
+    this.sub.add(
+      this.recordService.getCategories()
+        .subscribe((data: ICategory[]) => {
           this.categories = data;
           this.getEvents();
         })
@@ -42,42 +63,38 @@ export class HistoryComponent implements OnInit, OnDestroy {
   }
 
   private getEvents(): void {
+    this.dataTable = [];
     this.sub.add(
       this.historyService.getEvents()
-        .subscribe((data: IEvents[]) => {
-          data.forEach((val: IEvents) => this.dataTable.push({...val, category: this.getCategory(val)}));
-          this.show = true;
+        .subscribe((data: IEvent[]) => {
+          this.dataEvents = data;
+          data.forEach((val: IEvent) => {
+            this.dataTable.push({...val, category: this.getCategory(val)});
+            }
+          );
+          this.dataSource = new MatTableDataSource(this.dataTable);
           this.getDataChart();
-          this.historyService.sendEvent(this.dataTable);
         })
     );
   }
 
-  private getCategory(event: IEvents): string {
-    const category: ICategories | undefined = this.categories.find(item => item.id === event.category);
-    if (category !== undefined) {
-      return category.name;
-    } else {
-      return 'not found';
-    }
+  private getCategory(event: IEvent): string {
+    const category: ICategory | undefined = this.categories.find(item => item.id === event.category);
+    return category ? category.name : 'not found';
   }
 
   private getDataChart(): void {
-    this.dataTable.forEach((item: IEvents) => this.preDataChart.push({name: item.category, y: +item.amount}));
-    if (this.dataChart.length !== 0) {
-      this.dataChartFilter();
-    } else {
-      this.dataChart.push(this.preDataChart[0]);
-      this.preDataChart.shift();
-      this.dataChartFilter();
-    }
-  }
-
-  private dataChartFilter(): void {
-    this.dataChart.map((item: IChart) => {
-      this.preDataChart.map((val: IChart) => {
-        item.name === val.name ? item.y += val.y : this.dataChart.push(val);
+    this.dataChart = [];
+    this.categories.forEach((cat: ICategory) => {
+      const catEvent = this.dataEvents.filter((e: IEvent) => e.category === cat.id && e.type === 'outcome');
+      this.dataChart.push({
+        name: cat.name,
+        y: catEvent.reduce((total, e) => {
+          total += +e.amount;
+          return total;
+        }, 0)
       });
+      this.show = true;
     });
   }
 

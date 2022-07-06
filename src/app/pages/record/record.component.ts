@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RecordService } from './record.service';
 import { Subscription } from 'rxjs';
-import { ICategories } from '../history/history.interface';
+import { ICategory } from '../history/history.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventComponent } from './add-event/add-event.component';
 
@@ -12,7 +12,7 @@ import { AddEventComponent } from './add-event/add-event.component';
 })
 export class RecordComponent implements OnInit, OnDestroy {
 
-  public dataSource: ICategories[] = [];
+  public dataSource: ICategory[] = [];
   public show: boolean = false;
 
   private sub: Subscription = new Subscription();
@@ -39,7 +39,7 @@ export class RecordComponent implements OnInit, OnDestroy {
   private getCategory(): void {
     this.sub.add(
       this.recordService.getCategories()
-        .subscribe((data: ICategories[]) => {
+        .subscribe((data: ICategory[]) => {
           this.dataSource = data;
           this.show = true;
         })

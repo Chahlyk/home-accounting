@@ -1,30 +1,30 @@
 <p>Add event</p>
-<form>
+<form [formGroup]="form">
   <mat-form-field>
     <mat-label>Choose category</mat-label>
-    <mat-select>
+    <mat-select formControlName="category">
       <mat-option *ngFor="let category of data" [value]="category.id">{{category.name}}</mat-option>
     </mat-select>
-    <mat-error>Field is required</mat-error>
+    <mat-error *ngIf="form.get('category')?.errors?.['required']">Field is required</mat-error>
   </mat-form-field>
   <p>Choose type</p>
-  <mat-radio-group>
+  <mat-radio-group formControlName="type">
     <mat-radio-button value="income">Income</mat-radio-button>
     <mat-radio-button value="outcome">Outcome</mat-radio-button>
   </mat-radio-group>
   <mat-form-field>
     <mat-label>Enter sum</mat-label>
-    <input matInput>
-    <mat-error>Field is required</mat-error>
-    <mat-error>Field is invalid</mat-error>
+    <input matInput formControlName="amount">
+    <mat-error *ngIf="form.get('amount')?.errors?.['required']">Field is required</mat-error>
+    <mat-error *ngIf="form.get('amount')?.errors?.['pattern']">This field must contain only numbers</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Enter description</mat-label>
-    <input matInput>
-    <mat-error>Field is required</mat-error>
+    <input matInput formControlName="description">
+    <mat-error *ngIf="form.get('description')?.errors?.['required']">Field is required</mat-error>
   </mat-form-field>
   <div class="buttons">
-    <button mat-raised-button>Add</button>
-    <button mat-raised-button mat-dialog-close color="primary">Close</button>
+    <button mat-raised-button (click)="addEvents()" [disabled]="form.invalid">Add</button>
+    <button mat-raised-button [mat-dialog-close]="false" color="primary">Close</button>
   </div>
 </form>
