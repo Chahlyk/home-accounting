@@ -80,7 +80,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
 
   private getCategory(event: IEvent): string {
     const category: ICategory | undefined = this.categories.find(item => item.id === event.category);
-    return category !== undefined ? category.name : 'not found';
+    return category ? category.name : 'not found';
   }
 
   private getDataChart(): void {

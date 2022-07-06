@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { IEvent } from './history.interface';
 
 @Injectable({
@@ -15,7 +15,9 @@ export class HistoryService {
   }
 
   public getEvent(id: number): Observable<IEvent[]> {
-    return this.http.get<IEvent[]>(`events?id=${id}`);
+    return this.http.get<IEvent[]>('events', {
+      params: new HttpParams().set('id', id)
+    });
   }
 
 }
