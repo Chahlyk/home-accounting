@@ -4,8 +4,8 @@
   </div>
   <mat-divider></mat-divider>
   <div class="add-buttons">
-    <button mat-raised-button color="primary" (click)="openDialog()">Add event</button>
-    <button mat-raised-button color="primary">Add category</button>
+    <button mat-raised-button color="primary" (click)="openDialogEvent()">Add event</button>
+    <button mat-raised-button color="primary" (click)="openDialogCategory()">Add category</button>
   </div>
   <div *ngIf="show">
     <app-category-table [dataSource]="dataSource"></app-category-table>
