@@ -6,13 +6,15 @@ import { CategoryTableComponent } from './category-table/category-table.componen
 import { MaterialModule } from '../../shared/material.module';
 import { AddEventComponent } from './add-event/add-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 
 @NgModule({
   declarations: [
     RecordComponent,
     CategoryTableComponent,
-    AddEventComponent
+    AddEventComponent,
+    AddCategoryComponent
   ],
   exports: [
     RecordComponent

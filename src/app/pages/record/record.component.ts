@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ICategory } from '../history/history.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventComponent } from './add-event/add-event.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @Component({
   selector: 'app-record',
@@ -30,9 +31,14 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public openDialog(): void {
+  public openDialogEvent(): void {
     this.dialog.open(AddEventComponent, {
       data: this.dataSource
+    });
+  }
+
+  public openDialogCategory(): void {
+    this.dialog.open(AddCategoryComponent, {
     });
   }
 
