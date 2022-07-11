@@ -1,15 +1,18 @@
 <p>Add category</p>
-<form>
+<form [formGroup]="form">
   <mat-form-field>
     <mat-label>Enter name</mat-label>
-    <input matInput>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="form.get('name')?.errors?.['required']">Field is required</mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Enter capacity</mat-label>
-    <input matInput>
+    <input matInput formControlName="capacity">
+    <mat-error *ngIf="form.get('capacity')?.errors?.['required']">Field is required</mat-error>
+    <mat-error *ngIf="form.get('capacity')?.errors?.['pattern']">This field must contain only numbers</mat-error>
   </mat-form-field>
   <div class="buttons">
-    <button mat-raised-button>Add</button>
-    <button mat-raised-button mat-dialog-close color="primary">Close</button>
+    <button mat-raised-button (click)="addCategories()" [disabled]="form.invalid">Add</button>
+    <button mat-raised-button [mat-dialog-close]="false" color="primary">Close</button>
   </div>
 </form>

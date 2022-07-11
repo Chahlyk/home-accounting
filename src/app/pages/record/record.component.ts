@@ -38,8 +38,17 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   public openDialogCategory(): void {
-    this.dialog.open(AddCategoryComponent, {
+    const dialogRef = this.dialog.open(AddCategoryComponent, {
+      disableClose: true
     });
+    this.sub.add(
+      dialogRef.afterClosed()
+        .subscribe((result: boolean) => {
+          if (result) {
+            this.getCategory();
+          }
+        })
+    );
   }
 
   private getCategory(): void {
