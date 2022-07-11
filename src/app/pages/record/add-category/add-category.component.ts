@@ -16,7 +16,8 @@ export class AddCategoryComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddCategoryComponent>,
-    private recordService: RecordService ) { }
+    private recordService: RecordService
+  ) { }
 
   public ngOnInit(): void {
     this.buildForm();

@@ -52,7 +52,6 @@ export class RecordComponent implements OnInit, OnDestroy {
   }
 
   private getCategory(): void {
-    this.dataSource = [];
     this.sub.add(
       this.recordService.getCategories()
         .subscribe((data: ICategory[]) => {
