@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  flex-flow: column;
+}
+
+form button,
+mat-radio-button {
+  margin-right: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 250px;
+}
+
+.mat-form-field {
+  width: 100%;
+}

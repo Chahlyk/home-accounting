@@ -7,6 +7,7 @@ import { MaterialModule } from '../../shared/material.module';
 import { AddEventComponent } from './add-event/add-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     RecordComponent,
     CategoryTableComponent,
     AddEventComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    EditCategoryComponent
   ],
   exports: [
     RecordComponent
