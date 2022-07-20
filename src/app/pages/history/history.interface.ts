@@ -17,3 +17,8 @@ export interface IChart {
   name: string | number;
   y: number;
 }
+
+export interface IEditModal {
+  dataSource: ICategory[];
+  category: ICategory;
+}

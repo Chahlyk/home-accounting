@@ -1,0 +1,21 @@
+<p>Edit category</p>
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Choose category</mat-label>
+    <mat-select formControlName="id">
+      <mat-option *ngFor="let category of dataSource" [value]="category.id">{{category.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter name</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter capacity</mat-label>
+    <input matInput formControlName="capacity">
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-raised-button color="primary">Edit</button>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</form>

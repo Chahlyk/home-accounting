@@ -12,7 +12,7 @@
     <mat-error *ngIf="form.get('capacity')?.errors?.['pattern']">This field must contain only numbers</mat-error>
   </mat-form-field>
   <div class="buttons">
-    <button mat-raised-button (click)="addCategories()" [disabled]="form.invalid">Add</button>
-    <button mat-raised-button [mat-dialog-close]="false" color="primary">Close</button>
+    <button mat-raised-button (click)="addCategories()" [disabled]="form.invalid" color="primary">Add</button>
+    <button mat-button [mat-dialog-close]="false">Close</button>
   </div>
 </form>

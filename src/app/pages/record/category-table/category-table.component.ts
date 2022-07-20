@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ICategory } from '../../history/history.interface';
+import { EditCategoryComponent } from '../edit-category/edit-category.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -12,5 +14,19 @@ export class CategoryTableComponent {
   @Input() public dataSource: ICategory[] = [];
 
   public displayedColumns: string[] = ['index', 'name', 'capacity', 'action'];
+
+  constructor(
+    public dialog: MatDialog
+  ) { }
+
+  public openDialogEdit(id: number): void {
+    this.dialog.open(EditCategoryComponent, {
+      data: {
+        dataSource: this.dataSource,
+        category: this.dataSource[id - 1]
+      },
+      disableClose: true
+    });
+  }
 
 }

@@ -20,7 +20,7 @@
       <th class="action" mat-header-cell *matHeaderCellDef> </th>
       <td class="action" mat-cell *matCellDef="let element">
         <button mat-icon-button>
-          <mat-icon>create</mat-icon>
+          <mat-icon (click)="openDialogEdit(element.id)">create</mat-icon>
         </button>
         <button mat-icon-button>
           <mat-icon>delete</mat-icon>
