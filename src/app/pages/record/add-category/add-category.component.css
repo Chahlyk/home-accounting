@@ -3,8 +3,7 @@ form {
   flex-flow: column;
 }
 
-form button,
-mat-radio-button {
+form button, mat-radio-button {
   margin-right: 10px;
 }
 
