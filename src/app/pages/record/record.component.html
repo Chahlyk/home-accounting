@@ -8,7 +8,7 @@
     <button mat-raised-button color="primary" (click)="openDialogCategory()">Add category</button>
   </div>
   <div *ngIf="show">
-    <app-category-table [dataSource]="dataSource"></app-category-table>
+    <app-category-table [dataSource]="dataSource" (update)="onClick($event)"></app-category-table>
   </div>
   <div class="loading" *ngIf="!show">
     <p>loading...</p>
