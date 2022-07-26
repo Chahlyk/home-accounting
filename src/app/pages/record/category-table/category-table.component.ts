@@ -3,6 +3,7 @@ import { ICategory } from '../../history/history.interface';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { RecordService } from '../record.service';
 
 
 @Component({
@@ -13,14 +14,14 @@ import { Subscription } from 'rxjs';
 export class CategoryTableComponent implements OnDestroy {
 
   @Input() public dataSource: ICategory[] = [];
-  @Output() public update: EventEmitter<boolean> = new EventEmitter();
   public change: boolean = false;
   public displayedColumns: string[] = ['index', 'name', 'capacity', 'action'];
 
   private sub: Subscription = new Subscription();
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public recordService: RecordService
   ) { }
 
   public ngOnDestroy(): void {
@@ -29,15 +30,15 @@ export class CategoryTableComponent implements OnDestroy {
 
   public refreshTable(): void {
     this.change = !this.change;
-    this.update.emit(this.change);
+    this.recordService.sendUpdate(this.change);
     this.change = !this.change;
   }
 
-  public openDialogEdit(id: number): void {
+  public openDialogEdit(element: ICategory): void {
     const dialogRef = this.dialog.open(EditCategoryComponent, {
       data: {
         dataSource: this.dataSource,
-        category: this.dataSource[id - 1]
+        category: element
       },
       disableClose: true
     });

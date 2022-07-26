@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICategory, IEvent } from '../history/history.interface';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecordService {
+
+  private update: BehaviorSubject<object> = new BehaviorSubject<object>({});
 
   constructor(private http: HttpClient) { }
 
@@ -26,8 +28,16 @@ export class RecordService {
     return this.http.delete<ICategory>(`categories/${id}`);
   }
 
-  public editCategory(id: number, category: ICategory): Observable<ICategory> {
-    return this.http.put<ICategory>(`categories/${id}`, category);
+  public editCategory(category: ICategory): Observable<ICategory> {
+    return this.http.put<ICategory>(`categories/${category.id}`, category);
+  }
+
+  public sendUpdate(update: boolean): void {
+    this.update.next({data: update});
+  }
+
+  public getUpdate(): Observable<any> {
+    return this.update.asObservable();
   }
 
 }

@@ -15,7 +15,6 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   public dataSource: ICategory[] = [];
   public show: boolean = false;
-  public update: boolean = false;
 
   private sub: Subscription = new Subscription();
 
@@ -26,19 +25,22 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.getCategory();
+    this.refresh();
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
   }
 
-  public onClick(update: boolean): void {
-    this.update = update;
-    if (this.update) {
-      this.show = false;
-      this.getCategory();
-      this.show = true;
-    }
+  public refresh(): void {
+    this.sub.add(
+      this.recordService.getUpdate()
+        .subscribe(result => {
+          if (result) {
+            this.getCategory();
+          }
+        })
+    );
   }
 
   public openDialogEvent(): void {
