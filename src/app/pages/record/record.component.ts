@@ -25,10 +25,22 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.getCategory();
+    this.refresh();
   }
 
   public ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  public refresh(): void {
+    this.sub.add(
+      this.recordService.getUpdate()
+        .subscribe(result => {
+          if (result) {
+            this.getCategory();
+          }
+        })
+    );
   }
 
   public openDialogEvent(): void {
