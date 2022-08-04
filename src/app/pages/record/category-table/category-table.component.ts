@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { ICategory } from '../../history/history.interface';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,12 +28,6 @@ export class CategoryTableComponent implements OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public refreshTable(): void {
-    this.change = !this.change;
-    this.recordService.sendUpdate(this.change);
-    this.change = !this.change;
-  }
-
   public openDialogEdit(element: ICategory): void {
     const dialogRef = this.dialog.open(EditCategoryComponent, {
       data: {
@@ -46,7 +40,7 @@ export class CategoryTableComponent implements OnDestroy {
       dialogRef.afterClosed()
         .subscribe((result: boolean) => {
           if (result) {
-            this.refreshTable();
+            this.recordService.sendUpdate();
           }
         })
     );

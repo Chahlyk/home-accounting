@@ -35,10 +35,8 @@ export class RecordComponent implements OnInit, OnDestroy {
   public refresh(): void {
     this.sub.add(
       this.recordService.getUpdate()
-        .subscribe(result => {
-          if (result) {
+        .subscribe(() => {
             this.getCategory();
-          }
         })
     );
   }

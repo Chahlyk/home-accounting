@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICategory, IEvent } from '../history/history.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecordService {
 
-  private update: BehaviorSubject<object> = new BehaviorSubject<object>({});
+  private update: Subject<void> = new Subject<void>();
 
   constructor(private http: HttpClient) { }
 
@@ -32,8 +32,8 @@ export class RecordService {
     return this.http.put<ICategory>(`categories/${category.id}`, category);
   }
 
-  public sendUpdate(update: boolean): void {
-    this.update.next({data: update});
+  public sendUpdate(): void {
+    this.update.next();
   }
 
   public getUpdate(): Observable<any> {

@@ -54,10 +54,9 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.form.get('id')?.valueChanges.subscribe((id: number) => {
         const category = this.dataSource.find((item: ICategory) => item.id === id);
-        this.form.patchValue({
-          name: category?.name,
-          capacity: category?.capacity
-        });
+        if (category) {
+          this.form.patchValue(category);
+        }
       })
     );
   }
