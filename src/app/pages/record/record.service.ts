@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class RecordService {
 
-  private update: Subject<void> = new Subject<void>();
+  public update: Subject<void> = new Subject<void>();
 
   constructor(private http: HttpClient) { }
 
@@ -30,10 +30,6 @@ export class RecordService {
 
   public editCategory(category: ICategory): Observable<ICategory> {
     return this.http.put<ICategory>(`categories/${category.id}`, category);
-  }
-
-  public sendUpdate(): void {
-    this.update.next();
   }
 
   public getUpdate(): Observable<any> {

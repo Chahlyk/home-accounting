@@ -37,6 +37,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     this.sub.add(
       this.recordService.editCategory(category)
         .subscribe(() => {
+          this.recordService.update.next();
           this.dialogRef.close(true);
         })
     );
@@ -44,7 +45,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
 
   private buildForm(): void {
     this.form = new FormGroup( {
-      id: new FormControl(this.category.id, Validators.required),
+      id: new FormControl(this.category.id),
       name: new FormControl(this.category.name, Validators.required),
       capacity: new FormControl(this.category.capacity, [Validators.required, Validators.pattern(/^[0-9]+(?!.)/)]),
     });
@@ -55,7 +56,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
       this.form.get('id')?.valueChanges.subscribe((id: number) => {
         const category = this.dataSource.find((item: ICategory) => item.id === id);
         if (category) {
-          this.form.patchValue(category);
+          this.form.patchValue(category, {emitEvent: false});
         }
       })
     );

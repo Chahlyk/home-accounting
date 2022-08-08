@@ -32,15 +32,6 @@ export class RecordComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public refresh(): void {
-    this.sub.add(
-      this.recordService.getUpdate()
-        .subscribe(() => {
-            this.getCategory();
-        })
-    );
-  }
-
   public openDialogEvent(): void {
     this.dialog.open(AddEventComponent, {
       data: this.dataSource
@@ -67,6 +58,15 @@ export class RecordComponent implements OnInit, OnDestroy {
         .subscribe((data: ICategory[]) => {
           this.dataSource = data;
           this.show = true;
+        })
+    );
+  }
+
+  private refresh(): void {
+    this.sub.add(
+      this.recordService.getUpdate()
+        .subscribe(() => {
+          this.getCategory();
         })
     );
   }

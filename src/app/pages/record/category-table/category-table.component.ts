@@ -14,7 +14,6 @@ import { RecordService } from '../record.service';
 export class CategoryTableComponent implements OnDestroy {
 
   @Input() public dataSource: ICategory[] = [];
-  public change: boolean = false;
   public displayedColumns: string[] = ['index', 'name', 'capacity', 'action'];
 
   private sub: Subscription = new Subscription();
@@ -29,21 +28,13 @@ export class CategoryTableComponent implements OnDestroy {
   }
 
   public openDialogEdit(element: ICategory): void {
-    const dialogRef = this.dialog.open(EditCategoryComponent, {
+    this.dialog.open(EditCategoryComponent, {
       data: {
         dataSource: this.dataSource,
         category: element
       },
       disableClose: true
     });
-    this.sub.add(
-      dialogRef.afterClosed()
-        .subscribe((result: boolean) => {
-          if (result) {
-            this.recordService.sendUpdate();
-          }
-        })
-    );
   }
 
 }
