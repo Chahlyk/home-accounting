@@ -25,6 +25,7 @@ export class RecordComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.getCategory();
+    this.refresh();
   }
 
   public ngOnDestroy(): void {
@@ -57,6 +58,15 @@ export class RecordComponent implements OnInit, OnDestroy {
         .subscribe((data: ICategory[]) => {
           this.dataSource = data;
           this.show = true;
+        })
+    );
+  }
+
+  private refresh(): void {
+    this.sub.add(
+      this.recordService.getUpdate()
+        .subscribe(() => {
+          this.getCategory();
         })
     );
   }

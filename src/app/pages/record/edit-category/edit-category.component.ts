@@ -1,8 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICategory, IEditModal } from '../../history/history.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { RecordService } from '../record.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -18,6 +19,8 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IEditModal,
+    public dialogRef: MatDialogRef<EditCategoryComponent>,
+    private recordService: RecordService
   ) { }
 
   public ngOnInit(): void {
@@ -29,9 +32,20 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  public editCategory(): void {
+    const category: ICategory = this.form.value;
+    this.sub.add(
+      this.recordService.editCategory(category)
+        .subscribe(() => {
+          this.recordService.update.next();
+          this.dialogRef.close(true);
+        })
+    );
+  }
+
   private buildForm(): void {
     this.form = new FormGroup( {
-      id: new FormControl(this.category.id, Validators.required),
+      id: new FormControl(this.category.id),
       name: new FormControl(this.category.name, Validators.required),
       capacity: new FormControl(this.category.capacity, [Validators.required, Validators.pattern(/^[0-9]+(?!.)/)]),
     });
@@ -40,8 +54,10 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
   private changeFormDefault(): void {
     this.sub.add(
       this.form.get('id')?.valueChanges.subscribe((id: number) => {
-        this.form.get('name')?.setValue(this.dataSource[id - 1].name);
-        this.form.get('capacity')?.setValue(this.dataSource[id - 1].capacity);
+        const category = this.dataSource.find((item: ICategory) => item.id === id);
+        if (category) {
+          this.form.patchValue(category, {emitEvent: false});
+        }
       })
     );
   }

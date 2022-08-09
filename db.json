@@ -56,14 +56,14 @@
   },
   "categories": [
     {
-      "capacity": 15000,
+      "id": 1,
       "name": "Home",
-      "id": 1
+      "capacity": 15000
     },
     {
+      "id": 2,
       "name": "Food",
-      "capacity": 10000,
-      "id": 2
+      "capacity": 10000
     },
     {
       "id": 3,
