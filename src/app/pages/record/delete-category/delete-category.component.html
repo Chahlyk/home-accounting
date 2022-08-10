@@ -1,5 +1,7 @@
-<p>Are you sure you want to delete the category {{data.name}}</p>
-<div class="buttons">
-  <button mat-raised-button color="primary" (click)="deleteCategory()">Delete</button>
-  <button mat-button mat-dialog-close [mat-dialog-close]="false">Close</button>
+<div *ngIf="data.id">
+  <p>Are you sure you want to delete the category {{data.name}}?</p>
+  <div class="buttons">
+    <button mat-raised-button color="primary" (click)="deleteCategory(data.id)">Delete</button>
+    <button mat-button mat-dialog-close [mat-dialog-close]="false">Close</button>
+  </div>
 </div>

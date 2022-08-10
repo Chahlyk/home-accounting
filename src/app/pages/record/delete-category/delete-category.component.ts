@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ICategory } from '../../history/history.interface';
 import { RecordService } from '../record.service';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './delete-category.component.html',
   styleUrls: ['./delete-category.component.css']
 })
-export class DeleteCategoryComponent {
+export class DeleteCategoryComponent implements OnDestroy {
 
   private sub: Subscription = new Subscription();
 
@@ -19,16 +19,18 @@ export class DeleteCategoryComponent {
     private recordService: RecordService
   ) { }
 
-  public deleteCategory(): void {
-    if (this.data.id) {
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  public deleteCategory(id: number): void {
       this.sub.add(
-        this.recordService.deleteCategory(this.data.id)
+        this.recordService.deleteCategory(id)
           .subscribe(() => {
             this.recordService.update.next();
             this.dialogRef.close(true);
           })
       );
-    }
   }
 
 }
