@@ -8,6 +8,7 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
+import { DeleteCategoryComponent } from './delete-category/delete-category.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { EditCategoryComponent } from './edit-category/edit-category.component';
     CategoryTableComponent,
     AddEventComponent,
     AddCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    DeleteCategoryComponent
   ],
   exports: [
     RecordComponent

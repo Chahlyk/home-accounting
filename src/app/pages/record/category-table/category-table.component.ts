@@ -1,9 +1,9 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ICategory } from '../../history/history.interface';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
 import { RecordService } from '../record.service';
+import { DeleteCategoryComponent } from '../delete-category/delete-category.component';
 
 
 @Component({
@@ -11,21 +11,15 @@ import { RecordService } from '../record.service';
   templateUrl: './category-table.component.html',
   styleUrls: ['./category-table.component.css']
 })
-export class CategoryTableComponent implements OnDestroy {
+export class CategoryTableComponent {
 
   @Input() public dataSource: ICategory[] = [];
   public displayedColumns: string[] = ['index', 'name', 'capacity', 'action'];
-
-  private sub: Subscription = new Subscription();
 
   constructor(
     public dialog: MatDialog,
     public recordService: RecordService
   ) { }
-
-  public ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
 
   public openDialogEdit(element: ICategory): void {
     this.dialog.open(EditCategoryComponent, {
@@ -33,6 +27,13 @@ export class CategoryTableComponent implements OnDestroy {
         dataSource: this.dataSource,
         category: element
       },
+      disableClose: true
+    });
+  }
+
+  public openDialogDelete(element: ICategory): void {
+    this.dialog.open(DeleteCategoryComponent, {
+      data: element,
       disableClose: true
     });
   }
